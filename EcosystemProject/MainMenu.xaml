@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcosystemProject.MainMenu"
+             Title="MainMenu"
+             BackgroundImageSource="safari.png">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="32"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Label
+                Text="Écosystème"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="54"
+                HorizontalOptions="Center" />
+            
+            <Button
+                x:Name="StartBtn"
+                Text="Start"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="DarkSlateGrey"
+                BackgroundColor="NavajoWhite"
+                SemanticProperties.Hint="Start the simulation"
+                Clicked="OnStartClicked"
+                HorizontalOptions="Center" />
+            
+            <Button
+                x:Name="SettingsBtn"
+                Text="Settings"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="DarkSlateGrey"
+                BackgroundColor="NavajoWhite"
+                SemanticProperties.Hint="Start the simulation"
+                Clicked="OnSettingsClicked"
+                HorizontalOptions="Center" />
+
+
+            <Button
+                x:Name="QuitBtn"
+                Text="Quit"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="DarkSlateGrey"
+                BackgroundColor="NavajoWhite"
+                SemanticProperties.Hint="Close the app"
+                Clicked="OnQuitClicked"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
