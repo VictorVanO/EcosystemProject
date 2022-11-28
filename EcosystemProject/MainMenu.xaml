@@ -3,17 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcosystemProject.MainMenu"
              Title="MainMenu"
-             BackgroundImageSource="safari.png">
+             BackgroundImageSource="safari.png"
+             Shell.PresentationMode="NotAnimated"
+             Shell.NavBarIsVisible="false">
+    
     <ScrollView>
         <VerticalStackLayout
-            Spacing="32"
-            Padding="30,0"
+            Spacing="20"
             VerticalOptions="Center">
 
             <Label
                 Text="Écosystème"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="54"
+                FontFamily="Arial"
+                Margin="-50"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="By Van Olffen Victor and Mourad Mettioui"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="16"
+                FontFamily="Arial"
+                Margin="40"
                 HorizontalOptions="Center" />
             
             <Button
@@ -21,30 +33,33 @@
                 Text="Start"
                 FontSize="28"
                 TextColor="Black"
-                BorderColor="DarkSlateGrey"
+                BorderColor="#262626"
+                BorderWidth="2"
                 BackgroundColor="NavajoWhite"
                 SemanticProperties.Hint="Start the simulation"
                 Clicked="OnStartClicked"
                 HorizontalOptions="Center" />
-            
+
             <Button
                 x:Name="SettingsBtn"
                 Text="Settings"
                 FontSize="28"
                 TextColor="Black"
-                BorderColor="DarkSlateGrey"
+                BorderColor="#262626"
+                BorderWidth="2"
                 BackgroundColor="NavajoWhite"
-                SemanticProperties.Hint="Start the simulation"
+                Margin="-5"
+                SemanticProperties.Hint="Open the settings"
                 Clicked="OnSettingsClicked"
                 HorizontalOptions="Center" />
-
 
             <Button
                 x:Name="QuitBtn"
                 Text="Quit"
                 FontSize="28"
                 TextColor="Black"
-                BorderColor="DarkSlateGrey"
+                BorderColor="#262626"
+                BorderWidth="2"
                 BackgroundColor="NavajoWhite"
                 SemanticProperties.Hint="Close the app"
                 Clicked="OnQuitClicked"

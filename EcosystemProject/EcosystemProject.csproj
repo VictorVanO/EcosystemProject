@@ -15,7 +15,7 @@
 		<ApplicationTitle>EcosystemProject</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.ecosystemproject</ApplicationId>
+		<ApplicationId>com.ecamstudent.ecosystemproject</ApplicationId>
 		<ApplicationIdGuid>54718006-041e-4615-8dbf-90f39f33065f</ApplicationIdGuid>
 
 		<!-- Versions -->
