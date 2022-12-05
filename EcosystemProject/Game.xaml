@@ -14,7 +14,8 @@
     
     <VerticalStackLayout>
         <GraphicsView Drawable="{StaticResource Simulation}"
-                      HeightRequest="300"
-                      WidthRequest="400" />
+                      HeightRequest="600"
+                      WidthRequest="800">
+        </GraphicsView>
     </VerticalStackLayout>
 </ContentPage>
