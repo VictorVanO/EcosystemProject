@@ -15,7 +15,7 @@ namespace EcosystemProject
 		}
 
 		public Color Color { get { return this.color; } }
-		public double X {  get { return this.x; } }
-		public double Y {  get { return this.y; } }
-	}
+        public double X { get { return this.x; } set { this.x = value; } }
+        public double Y { get { return this.y; } set { this.y = value; } }
+    }
 }

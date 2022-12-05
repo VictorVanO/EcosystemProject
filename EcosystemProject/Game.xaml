@@ -11,11 +11,27 @@
     <ContentPage.Resources>
         <drawable:Simulation x:Key="Simulation" />
     </ContentPage.Resources>
-    
+
     <VerticalStackLayout>
-        <GraphicsView Drawable="{StaticResource Simulation}"
-                      HeightRequest="600"
-                      WidthRequest="800">
+        <GraphicsView 
+                      x:Name="graphics"
+                      Drawable="{StaticResource Simulation}"
+                      HeightRequest="780"
+                      WidthRequest="1400"
+                      MinimumHeightRequest="500"
+                      MinimumWidthRequest="800">
         </GraphicsView>
+        <Button
+                x:Name="PauseBtn"
+                Text="Pause"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="#262626"
+                BorderWidth="2"
+                BackgroundColor="White"
+                SemanticProperties.Hint="Pause the simulation"
+                Clicked="PauseClicked"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
