@@ -10,10 +10,10 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:MainMenu}"
         Route="MainMenu" />
-    
+
     <ShellContent
         Title="Game"
         ContentTemplate="{DataTemplate local:Game}"
         Route="Game"/>
-
+    
 </Shell>
