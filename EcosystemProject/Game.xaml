@@ -16,7 +16,7 @@
         <GraphicsView 
                       x:Name="graphics"
                       Drawable="{StaticResource Simulation}"
-                      HeightRequest="780"
+                      HeightRequest="650"
                       WidthRequest="1400"
                       MinimumHeightRequest="500"
                       MinimumWidthRequest="800">
@@ -32,6 +32,6 @@
                 SemanticProperties.Hint="Pause the simulation"
                 Clicked="PauseClicked"
                 HorizontalOptions="Center"
-                VerticalOptions="Center" />
+                VerticalOptions="Start" />
     </VerticalStackLayout>
 </ContentPage>
