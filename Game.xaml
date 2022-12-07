@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:drawable="clr-namespace:EcosystemProject"
+             x:Class="EcosystemProject.Game"
+             Title="Game"
+             BackgroundColor="Black"
+             Shell.PresentationMode="NotAnimated"
+             Shell.NavBarIsVisible="false">
+
+    <ContentPage.Resources>
+        <drawable:Simulation x:Key="Simulation" />
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout>
+        <GraphicsView Drawable="{StaticResource Simulation}"
+                      HeightRequest="600"
+                      WidthRequest="800">
+        </GraphicsView>
+    </VerticalStackLayout>
+</ContentPage>
