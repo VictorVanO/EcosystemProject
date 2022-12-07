@@ -1,3 +1,4 @@
+
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
@@ -21,7 +22,7 @@ namespace EcosystemProject
 
         double poopX = 200;
         double poopY = 200;
-        public Animal(double x, double y, double health, double energy) : base(Colors.Red, x, y, health, energy)
+        public Animal(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction) : base(Colors.Red, x, y, health, energy,  0,0, 100, 30)
         {
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
             objects = new List<SimulationObject>();
@@ -35,18 +36,34 @@ namespace EcosystemProject
                 if (nextMove == "Up")
                 {
                     Y -= moveSpeed;
+                    if(Y ==0)
+                    {
+                        Y += 10;
+                    }
                 }
                 else if (nextMove == "Down")
                 {
                     Y += moveSpeed;
+                    if (Y == 700)
+                    {
+                        Y -= 10;
+                    }
                 }
                 else if (nextMove == "Left")
                 {
                     X -= moveSpeed;
+                    if (X == 0)
+                    {
+                        X += 10;
+                    }
                 }
                 else if (nextMove == "Right")
                 {
                     X += moveSpeed;
+                    if (X == 1400)
+                    {
+                        X -= 10;
+                    }
                 }
                 else if (nextMove == "Stop") { } // Do nothing
                 moveTimer++;
@@ -109,6 +126,14 @@ namespace EcosystemProject
                 canvas.StrokeColor = Colors.Yellow;
                 canvas.StrokeSize = 3;
                 canvas.DrawLine((float)X - 10, (float)Y - 15, (float)X + (float)Energy, (float)Y - 15);
+
+                //Zone action
+                canvas.StrokeColor = Colors.Red;
+                canvas.DrawCircle((float)X, (float)Y, ØAction);
+
+                //Zone vision
+                canvas.StrokeColor = Colors.LightBlue;
+                canvas.DrawCircle((float)X, (float)Y, ØVision);
             }
 
             if (isAlive == false)

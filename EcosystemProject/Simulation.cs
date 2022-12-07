@@ -13,10 +13,17 @@ namespace EcosystemProject
         {
             objects = new List<SimulationObject>();
 
-            objects.Add(new Animal(200, 200, 10, 10));
-            objects.Add(new Animal(1000, 400, 10, 10));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10));
-            //objects.Add(new Poop(200, 200));
+            objects.Add(new Animal(600, 700, 10, 10,0,0,0,0));
+            objects.Add(new Animal(400, 650, 10, 10,0,0,0,0));
+            objects.Add(new Animal(500, 550, 10, 10,0,0,0,0));
+            objects.Add(new Animal(700, 600, 10, 10,0,0,0,0));
+            objects.Add(new Animal(900, 500, 10, 10,0,0,0,0));
+            objects.Add(new Animal(1000,400, 10, 10,0,0,0,0));
+            objects.Add(new Animal(100, 300, 10, 10,0,0,0,0));
+            objects.Add(new Animal(800, 200, 10, 10,0,0,0,0));
+
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10,30,60,0,0));
+            objects.Add(new Poop(200, 200));
         }
         public void Update()
         {
