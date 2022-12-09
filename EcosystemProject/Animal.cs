@@ -1,3 +1,4 @@
+
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
@@ -54,18 +55,34 @@ namespace EcosystemProject
                 if (nextMove == "Up")
                 {
                     Y -= moveSpeed;
+                    if(Y ==0)
+                    {
+                        Y += 10;
+                    }
                 }
                 else if (nextMove == "Down")
                 {
                     Y += moveSpeed;
+                    if (Y == 700)
+                    {
+                        Y -= 10;
+                    }
                 }
                 else if (nextMove == "Left")
                 {
                     X -= moveSpeed;
+                    if (X == 0)
+                    {
+                        X += 10;
+                    }
                 }
                 else if (nextMove == "Right")
                 {
                     X += moveSpeed;
+                    if (X == 1400)
+                    {
+                        X -= 10;
+                    }
                 }
                 else if (nextMove == "Stop") { } // Do nothing
                 moveTimer++;

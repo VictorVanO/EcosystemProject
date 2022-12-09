@@ -6,7 +6,9 @@
              Title="Game"
              BackgroundColor="ForestGreen"
              Shell.PresentationMode="NotAnimated"
-             Shell.NavBarIsVisible="false">
+             Shell.NavBarIsVisible="false"
+             >
+            
 
     <ContentPage.Resources>
         <drawable:Simulation x:Key="Simulation" />
@@ -16,10 +18,11 @@
         <GraphicsView 
                       x:Name="graphics"
                       Drawable="{StaticResource Simulation}"
-                      HeightRequest="650"
+                      HeightRequest="700"
                       WidthRequest="1400"
-                      MinimumHeightRequest="500"
-                      MinimumWidthRequest="800">
+            
+           >
+            
         </GraphicsView>
         <!--<HorizontalStackLayout>-->
             <Button
@@ -48,4 +51,5 @@
                 VerticalOptions="Start" />
         <!--</HorizontalStackLayout>-->
     </VerticalStackLayout>
+    
 </ContentPage>
