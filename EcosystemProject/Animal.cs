@@ -7,30 +7,49 @@ namespace EcosystemProject
 {
     public class Animal : SimulationObject
     {
-        List<SimulationObject> objects;
-
-        Simulation Simulation;
-
         Random random = new Random();
+
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
         string nextMove = "";
         int moveTimer = 0;
         int moveSpeed = 1;
+
+        double leftX = 20;
+        double topY = 20;
+        double rightX = 1380;
+        double bottomY = 630;
+
         bool isAlive = true;
+
         int poopTimer = 0;
 
-        double poopX = 200;
-        double poopY = 200;
-        public Animal(double x, double y, double health, double energy) : base(Colors.Red, x, y, health, energy)
+        public Animal(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, simulation)
         {
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
-            objects = new List<SimulationObject>();
         }
         public override void Update()
         {
             // If animal is alive
             if(isAlive)
-            {
+            {   
+                // If animal leaves the map, comes back
+                if (X <= leftX)
+                {
+                    nextMove = "Right";
+                }
+                else if (X >= rightX)
+                {
+                    nextMove = "Left";
+                }
+                else if (Y <= topY)
+                {
+                    nextMove = "Down";
+                }
+                else if (Y >= bottomY)
+                {
+                    nextMove = "Up";
+                }
+
                 // Random Movements
                 if (nextMove == "Up")
                 {
@@ -69,7 +88,7 @@ namespace EcosystemProject
                     Energy -= 0.01; // Lose energy every update
                 }
 
-                poopTimer += 5;
+                poopTimer += 1;
             }
 
             // If health is empty, animal dies
@@ -79,6 +98,12 @@ namespace EcosystemProject
             if(isAlive == false)
             {
                 Energy = -10;
+            }
+
+            if (poopTimer >= 1500)
+            {
+                get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
+                poopTimer = 0;
             }
         }
 
@@ -109,17 +134,19 @@ namespace EcosystemProject
                 canvas.StrokeColor = Colors.Yellow;
                 canvas.StrokeSize = 3;
                 canvas.DrawLine((float)X - 10, (float)Y - 15, (float)X + (float)Energy, (float)Y - 15);
+
+                //Zone action
+                canvas.StrokeColor = Colors.Red;
+                canvas.DrawCircle((float)X, (float)Y, ØAction);
+
+                //Zone vision
+                canvas.StrokeColor = Colors.LightBlue;
+                canvas.DrawCircle((float)X, (float)Y, ØVision);
             }
 
             if (isAlive == false)
             {
-                //objects.Add(new Meat(X, Y));
-            }
-
-            if (poopTimer >= 100)
-            {
-                objects.Add(new Poop(X, Y));
-                poopTimer = 0;
+                //Simulation.objects.Add(new Meat(X, Y));
             }
         }
     }

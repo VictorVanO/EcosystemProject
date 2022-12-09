@@ -21,7 +21,8 @@
                       MinimumHeightRequest="500"
                       MinimumWidthRequest="800">
         </GraphicsView>
-        <Button
+        <!--<HorizontalStackLayout>-->
+            <Button
                 x:Name="PauseBtn"
                 Text="Pause"
                 FontSize="28"
@@ -33,5 +34,18 @@
                 Clicked="PauseClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
+            <Button
+                x:Name="AddBtn"
+                Text="Add"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="#262626"
+                BorderWidth="2"
+                BackgroundColor="White"
+                SemanticProperties.Hint="Add animal to the simulation"
+                Clicked="AddClicked"
+                HorizontalOptions="Center"
+                VerticalOptions="Start" />
+        <!--</HorizontalStackLayout>-->
     </VerticalStackLayout>
 </ContentPage>

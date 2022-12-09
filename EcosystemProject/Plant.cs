@@ -4,7 +4,7 @@ namespace EcosystemProject
     public class Plant : SimulationObject
     {
         bool isAlive = true;
-        public Plant(double x, double y, double health, double energy) : base(Colors.Green, x, y, health, energy)
+        public Plant(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction, Simulation simulation) : base(Colors.Green, x, y, health, energy, 0, 0, 150, 60, simulation)
         {
 
         }
@@ -60,6 +60,14 @@ namespace EcosystemProject
                 canvas.StrokeColor = Colors.Yellow;
                 canvas.StrokeSize = 3;
                 canvas.DrawLine((float)X - 10, (float)Y - 15, (float)X + (float)Energy, (float)Y - 15);
+
+                //Zone semis
+                canvas.StrokeColor = Colors.DarkGreen;
+                canvas.DrawCircle((float)X, (float)Y, ØSemis);
+
+                //Zone root
+                canvas.StrokeColor = Colors.Brown;
+                canvas.DrawCircle((float)X, (float)Y, ØRoot);
             }
         }
     }
