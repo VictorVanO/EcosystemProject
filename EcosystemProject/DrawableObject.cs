@@ -7,8 +7,8 @@ namespace EcosystemProject
 	{
 		Color color;
 		double x, y, health, energy;
-		float Øroot, Øsemis, Øvision;
-        float Øaction = 50;
+		float Øroot, Øsemis, Øvision, Øaction;
+        
 		public DrawableObject(Color color, double x, double y, double health, double energy,float Øroot, float Øsemis, float Øvision, float Øaction)
 		{
 			this.color = color;

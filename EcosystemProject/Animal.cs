@@ -1,4 +1,5 @@
 
+
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
@@ -10,13 +11,11 @@ namespace EcosystemProject
     {
         List<SimulationObject> objects;
 
-        Simulation Simulation;
-
         Random random = new Random();
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
         string nextMove = "";
         int moveTimer = 0;
-        int moveSpeed = 1;
+        int moveSpeed = 2;
         bool isAlive = true;
         int poopTimer = 0;
 
@@ -32,11 +31,13 @@ namespace EcosystemProject
             // If animal is alive
             if(isAlive)
             {
+                poopTimer += 5;
+
                 // Random Movements
                 if (nextMove == "Up")
                 {
                     Y -= moveSpeed;
-                    if(Y ==0)
+                    if(Y <=0)
                     {
                         Y += 10;
                     }
@@ -44,7 +45,7 @@ namespace EcosystemProject
                 else if (nextMove == "Down")
                 {
                     Y += moveSpeed;
-                    if (Y == 700)
+                    if (Y >= 700)
                     {
                         Y -= 10;
                     }
@@ -52,7 +53,7 @@ namespace EcosystemProject
                 else if (nextMove == "Left")
                 {
                     X -= moveSpeed;
-                    if (X == 0)
+                    if (X <= 0)
                     {
                         X += 10;
                     }
@@ -60,7 +61,7 @@ namespace EcosystemProject
                 else if (nextMove == "Right")
                 {
                     X += moveSpeed;
-                    if (X == 1400)
+                    if (X >= 1400)
                     {
                         X -= 10;
                     }
@@ -85,8 +86,13 @@ namespace EcosystemProject
                 {
                     Energy -= 0.01; // Lose energy every update
                 }
+                if (poopTimer >= 10)
+                {
+                   
+                    poopTimer = 0;
+                }
 
-                poopTimer += 5;
+
             }
 
             // If health is empty, animal dies
@@ -105,7 +111,7 @@ namespace EcosystemProject
             {
                 //Animal circle
                 canvas.FillColor = Color;
-                canvas.FillCircle(new Point(X, Y), 10.0);
+                canvas.FillCircle((float)X, (float)Y, (float)10.0);
 
                 //Health bar shadow
                 canvas.StrokeColor = Colors.DarkGray;
@@ -134,18 +140,19 @@ namespace EcosystemProject
                 //Zone vision
                 canvas.StrokeColor = Colors.LightBlue;
                 canvas.DrawCircle((float)X, (float)Y, ØVision);
+
+                //poop
+                canvas.FillColor = Color;
+                canvas.FillCircle((float)X, (float)Y, (float) 3.0);
             }
+               
 
             if (isAlive == false)
             {
                 //objects.Add(new Meat(X, Y));
             }
 
-            if (poopTimer >= 100)
-            {
-                objects.Add(new Poop(X, Y));
-                poopTimer = 0;
-            }
+            
         }
     }
 }
