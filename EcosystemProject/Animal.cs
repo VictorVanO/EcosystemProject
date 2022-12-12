@@ -1,6 +1,5 @@
 
 
-using Java.Util;
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
@@ -12,7 +11,8 @@ namespace EcosystemProject
     {
         Simulation Simulation;
 
-        Random random = new Random();
+        Random random = new System.Random();
+        
 
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
         String nextMove = "";
@@ -29,13 +29,15 @@ namespace EcosystemProject
 
         int poopTimer = 0;
 
+
         public Animal(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, simulation)
         {
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
         }
         public override void Update()
         {
-            {   
+            {
+                
                 // If animal leaves the map, comes back
                 if (X <= leftX)
                 {
@@ -109,20 +111,9 @@ namespace EcosystemProject
                 {
 
                 poopTimer += 1;
-            }
-                    if (poopTimer >= 100)
-                    {
-                        objects.Add(new Poop(X, Y));
-                        poopTimer = 0;
-                    }
-                    {
-                        objects.Add(new Poop(X, Y));
-                        poopTimer = 0;
-                    }
-                    {
-                        objects.Add(new Poop(X, Y));
-                        poopTimer = 0;
-                    }
+                Energy -= 0.01;
+                }
+                   
                 }
 
 
@@ -137,7 +128,7 @@ namespace EcosystemProject
                 Energy = -10;
             }
 
-            if (poopTimer >= 1500)
+            if (poopTimer >= random.Next(600, 1500))
             {
                 get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
                 poopTimer = 0;

@@ -4,7 +4,7 @@ namespace EcosystemProject
     public class Plant : SimulationObject
     {
         bool isAlive = true;
-        public Plant(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction, Simulation simulation) : base(Colors.Green, x, y, health, energy, 0, 0, 150, 60, simulation)
+        public Plant(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction, Simulation simulation) : base(Colors.Green, x, y, health, energy, 150, 60, 0, 0, simulation)
         {
 
         }
