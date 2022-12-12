@@ -18,16 +18,13 @@
         <GraphicsView 
                       x:Name="graphics"
                       Drawable="{StaticResource Simulation}"
-                      HeightRequest="700"
-                      WidthRequest="1400"
-            
-           >
-            
+                      HeightRequest="650"
+                      WidthRequest="1400">
         </GraphicsView>
-        <!--<HorizontalStackLayout>-->
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Button
                 x:Name="PauseBtn"
-                Text="Pause"
+                Text="PAUSE"
                 FontSize="28"
                 TextColor="Black"
                 BorderColor="#262626"
@@ -38,18 +35,29 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
             <Button
-                x:Name="AddBtn"
-                Text="Add"
+                x:Name="AddAnimalBtn"
+                Text="ADD ANIMAL"
                 FontSize="28"
                 TextColor="Black"
                 BorderColor="#262626"
                 BorderWidth="2"
                 BackgroundColor="White"
                 SemanticProperties.Hint="Add animal to the simulation"
-                Clicked="AddClicked"
+                Clicked="AddAnimalClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
-        <!--</HorizontalStackLayout>-->
+            <Button
+                x:Name="AddPlantBtn"
+                Text="ADD PLANT"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="#262626"
+                BorderWidth="2"
+                BackgroundColor="White"
+                SemanticProperties.Hint="Add plant to the simulation"
+                Clicked="AddPlantClicked"
+                HorizontalOptions="Center"
+                VerticalOptions="Start" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
-    
 </ContentPage>

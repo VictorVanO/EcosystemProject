@@ -34,17 +34,21 @@ public partial class Game : ContentPage
         if (isRunning)
         {
             timer.Start();
-            PauseBtn.Text = "Pause";
+            PauseBtn.Text = "PAUSE";
         } 
         else
         {
             timer.Stop();
-            PauseBtn.Text = "Start";
+            PauseBtn.Text = "START";
         }
     }
 
-    private void AddClicked(object sender, EventArgs e)
+    private void AddAnimalClicked(object sender, EventArgs e)
     {
-        simulation.objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, 0, 0, simulation));
+        simulation.objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
+    }
+    private void AddPlantClicked(object sender, EventArgs e)
+    {
+        simulation.objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
     }
 }

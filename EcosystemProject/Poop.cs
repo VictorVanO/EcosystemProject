@@ -18,11 +18,7 @@ namespace EcosystemProject
             {
                 // Draw poop
                 canvas.FillColor = Color;
-                canvas.FillEllipse((float)X, (float)Y, 10, 5);
-            }
-            else
-            {
-                // Draw nothing
+                canvas.FillEllipse((float)X, (float)Y, 11, 7);
             }
         }
     }
