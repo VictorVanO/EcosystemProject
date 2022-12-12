@@ -7,16 +7,17 @@ namespace EcosystemProject
 	{
 		Color color;
 		double x, y, health, energy;
-		float Øroot, Øsemis, Øvision, Øaction;
-        
-		public DrawableObject(Color color, double x, double y, double health, double energy,float Øroot, float Øsemis, float Øvision, float Øaction)
-		{
+
+        float Øroot, Øsemis, Øvision;
+        float Øaction = 50;
+        public DrawableObject(Color color, double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction)
+        {
 			this.color = color;
 			this.x = x;
 			this.y = y;
             this.health = health;
 			this.energy = energy;
-			this.Øroot = Øroot;
+            this.Øroot = Øroot;
             this.Øsemis = Øsemis;
             this.Øvision = Øvision;
             this.Øaction = Øaction;
@@ -32,6 +33,6 @@ namespace EcosystemProject
         public float ØVision { get { return this.Øvision; } set { this.Øvision = value; } }
         public float ØAction { get { return this.Øaction; } set { this.Øaction = value; } }
 
-        public abstract void Draw(ICanvas canvas);
+        public abstract void Draw(ICanvas canvas);	
     }
 }

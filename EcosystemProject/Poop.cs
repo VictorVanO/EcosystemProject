@@ -4,7 +4,7 @@ namespace EcosystemProject
     public class Poop : SimulationObject
     {
         bool exist = true;
-        public Poop(double x, double y) : base(Colors.Brown, x, y, 0, 0,0,0,0,0)
+        public Poop(double x, double y, Simulation simulation) : base(Colors.SaddleBrown, x, y, 0, 0, 0, 0, 0, 0, simulation)
         {
 
         }
@@ -14,9 +14,16 @@ namespace EcosystemProject
 
         public override void Draw(ICanvas canvas)
         {
-            // Draw poop circle
-            canvas.FillColor = Color;
-            canvas.FillCircle(new Point(X, Y), 3.0);
+            if (exist)
+            {
+                // Draw poop
+                canvas.FillColor = Color;
+                canvas.FillEllipse((float)X, (float)Y, 10, 5);
+            }
+            else
+            {
+                // Draw nothing
+            }
         }
     }
 }

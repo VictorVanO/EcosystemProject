@@ -9,30 +9,51 @@ namespace EcosystemProject
 {
     public class Animal : SimulationObject
     {
-        List<SimulationObject> objects;
+        Simulation Simulation;
 
         Random random = new Random();
+
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
-        string nextMove = "";
+        int moveSpeed = 1;
+
+        double leftX = 20;
+        double topY = 20;
+        double rightX = 1380;
+        double bottomY = 630;
+
         int moveTimer = 0;
-        int moveSpeed = 2;
+        int moveSpeed = 1;
         bool isAlive = true;
+
         int poopTimer = 0;
 
-        double poopX = 200;
-        double poopY = 200;
-        public Animal(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction) : base(Colors.Red, x, y, health, energy,  0,0, 100, 30)
+        public Animal(double x, double y, double health, double energy, float Øroot, float Øsemis, float Øvision, float Øaction, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, simulation)
         {
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
-            objects = new List<SimulationObject>();
         }
         public override void Update()
         {
-            // If animal is alive
+            {   
+                // If animal leaves the map, comes back
+                if (X <= leftX)
+                {
+                    nextMove = "Right";
+                }
+                else if (X >= rightX)
+                {
+                    nextMove = "Left";
+                }
+                else if (Y <= topY)
+                {
+                    nextMove = "Down";
+                }
+                else if (Y >= bottomY)
+                {
+                    nextMove = "Up";
+                }
+
             if(isAlive)
             {
-                poopTimer += 5;
-
                 // Random Movements
                 if (nextMove == "Up")
                 {
@@ -84,13 +105,11 @@ namespace EcosystemProject
                 }
                 else // Or if animal has energy
                 {
-                    Energy -= 0.01; // Lose energy every update
-                }
-                if (poopTimer >= 10)
-                {
-                   
-                    poopTimer = 0;
-                }
+
+                poopTimer += 1;
+            }
+                poopTimer += 5;
+            }
 
 
             }
@@ -102,6 +121,12 @@ namespace EcosystemProject
             if(isAlive == false)
             {
                 Energy = -10;
+            }
+
+            if (poopTimer >= 1500)
+            {
+                get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
+                poopTimer = 0;
             }
         }
 
@@ -147,12 +172,22 @@ namespace EcosystemProject
             }
                
 
-            if (isAlive == false)
-            {
-                //objects.Add(new Meat(X, Y));
+                //Simulation.objects.Add(new Meat(X, Y));
             }
 
-            
+            if (poopTimer >= 100)
+            {
+                objects.Add(new Poop(X, Y));
+                poopTimer = 0;
+            }
+            {
+                objects.Add(new Poop(X, Y));
+                poopTimer = 0;
+            }
+            {
+                objects.Add(new Poop(X, Y));
+                poopTimer = 0;
+            }
         }
     }
 }
