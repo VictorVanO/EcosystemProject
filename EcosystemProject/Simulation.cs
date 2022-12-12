@@ -14,9 +14,9 @@ namespace EcosystemProject
         {
             objects = new List<SimulationObject>();
 
-            objects.Add(new Animal(200, 200, 10, 10, 0, 0, 0, 0, this));
-            objects.Add(new Animal(1000, 400, 10, 10, 0, 0, 0, 0, this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, 0, 0, this));
+            objects.Add(new Animal(200, 200, 10, 10, 0, 0, this));
+            objects.Add(new Animal(1000, 400, 10, 10, 0, 0, this));
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
         }
         public void Update()
         {
