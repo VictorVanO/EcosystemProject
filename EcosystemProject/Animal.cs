@@ -1,5 +1,6 @@
 
 
+using Java.Util;
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
@@ -14,6 +15,7 @@ namespace EcosystemProject
         Random random = new Random();
 
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
+        String nextMove = "";
         int moveSpeed = 1;
 
         double leftX = 20;
@@ -22,7 +24,7 @@ namespace EcosystemProject
         double bottomY = 630;
 
         int moveTimer = 0;
-        int moveSpeed = 1;
+       
         bool isAlive = true;
 
         int poopTimer = 0;
@@ -108,8 +110,20 @@ namespace EcosystemProject
 
                 poopTimer += 1;
             }
-                poopTimer += 5;
-            }
+                    if (poopTimer >= 100)
+                    {
+                        objects.Add(new Poop(X, Y));
+                        poopTimer = 0;
+                    }
+                    {
+                        objects.Add(new Poop(X, Y));
+                        poopTimer = 0;
+                    }
+                    {
+                        objects.Add(new Poop(X, Y));
+                        poopTimer = 0;
+                    }
+                }
 
 
             }
@@ -175,19 +189,7 @@ namespace EcosystemProject
                 //Simulation.objects.Add(new Meat(X, Y));
             }
 
-            if (poopTimer >= 100)
-            {
-                objects.Add(new Poop(X, Y));
-                poopTimer = 0;
-            }
-            {
-                objects.Add(new Poop(X, Y));
-                poopTimer = 0;
-            }
-            {
-                objects.Add(new Poop(X, Y));
-                poopTimer = 0;
-            }
-        }
+            
+        
     }
 }
