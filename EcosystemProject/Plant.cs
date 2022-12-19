@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+
 namespace EcosystemProject
 {
     public class Plant : SimulationObject
@@ -9,6 +11,9 @@ namespace EcosystemProject
         bool isAlive = true;
         int addPoop = 1;
         int checkPoopTimer = 0;
+
+        int spawnPlant = 0;
+        int poopStock = 0;
         public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, 150, 60, 0, 0, simulation)
         {
         }
@@ -28,17 +33,24 @@ namespace EcosystemProject
                 }
                 else
                 {
-                    Energy -= 0.01;
+                    Energy -= 0.02;
                 }
 
                 checkPoopTimer++;
                 if (checkPoopTimer >= 100)
                 {
                     // Call the ceckPoop function
-                    //checkPoop();
+                    checkPoop();
                     checkPoopTimer = 0;
                 }
-                
+
+                spawnPlant++;
+                if (spawnPlant >= 2000) // Spawn a new plant every 20 seconds
+                {
+                    get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
+                    spawnPlant = random.Next(0, 500);
+                }
+
                 // If health is empty, animal dies
                 if (Health <= -10) { isAlive = false; }
             }
@@ -47,7 +59,7 @@ namespace EcosystemProject
                 Energy = -10;
                 if (addPoop == 1)
                 {
-                    get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
+                    get_simulation().Add(new Poop(X, Y, get_simulation()));
                     addPoop = 0;
                 }
             }
@@ -91,22 +103,75 @@ namespace EcosystemProject
         }
 
         // Method to check if there is poop in root radius. If yes, then remove the poop
-        // and add a plant in the semis radius
-        // À terminer, pas encore fonctionnelle
-        //public void checkPoop()
-        //{
-        //    foreach (int x in Enumerable.Range((int)(X - RootRadius), (int)(X + RootRadius)))
-        //    {
-        //        foreach (int y in Enumerable.Range((int)(Y - RootRadius), (int)(Y + RootRadius)))
-        //        {
-        //            if (get_simulation().objects.Remove(new Poop(x, y, get_simulation())) != false)
-        //            {
-        //                get_simulation().objects.Remove(new Poop(x, y, get_simulation()));
-        //                get_simulation().objects.Add(new Plant(random.Next((int)(x - SemisRadius), (int)(x + SemisRadius)), random.Next((int)(y - SemisRadius), (int)(y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
-        //            }
-        //        }
-        //    }
-                    
-        //}
+        // and refills the plant's energy.
+        public void checkPoop()
+        {
+            foreach (SimulationObject item in get_simulation().Objects)
+            {
+                if (item.X >= (X - RootRadius) && item.X <= (X + RootRadius))
+                {
+                    if (item.Y >= (Y - RootRadius) && item.Y <= (Y + RootRadius))
+                    {
+                        if (item.GetType() == typeof(Poop)) 
+                        {
+                            get_simulation().Remove(item);
+                            //poopStock++;
+                            //if (poopStock > 5)
+                            //{
+                            //    newPlant();
+                            //    poopStock = 0;
+                            //}
+                            Energy += 20;
+                            if (Energy > 10)
+                            {
+                                Health += 5;
+                                Energy = 10;
+                                if (Health > 10)
+                                {
+                                    Health = 10;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            //foreach (SimulationObject item in get_simulation().Objects)
+            //{
+            //    if (item.X >= (X - RootRadius) && get_simulation().objects[x].X <= (X + RootRadius))
+            //    {
+            //        if (get_simulation().objects[x].Y >= (Y - RootRadius) && get_simulation().objects[x].Y <= (Y + RootRadius))
+            //        {
+            //            if (get_simulation().objects[x] is Poop)
+            //            {
+                            //get_simulation().objects.RemoveAt(x);
+                            //poopStock++;
+                            //if (poopStock >= 3)
+                            //{
+                            //    newPlant();
+                            //    //get_simulation().objects.Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
+                            //    poopStock = 0;
+                            //}
+                            //Energy += 5;
+                            //if (Energy > 10)
+                            //{
+                            //    Health += 5;
+                            //    Energy = 10;
+                            //    if (Health > 10)
+                            //    {
+                            //        Health = 10;
+                            //    }
+                            //}
+            //            }
+            //        }
+            //}
+            //}
+        }
+
+        public void newPlant()
+        {
+            get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
+        }
     }
 }
