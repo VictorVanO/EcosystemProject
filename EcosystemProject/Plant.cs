@@ -12,8 +12,8 @@ namespace EcosystemProject
         int addPoop = 1;
         int checkPoopTimer = 0;
 
-        int spawnPlant = 0;
-        int poopStock = 0;
+        int spawnPlantTimer = 0;
+        int spawnPlantStock = 0;
         public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, 150, 60, 0, 0, simulation)
         {
         }
@@ -44,11 +44,12 @@ namespace EcosystemProject
                     checkPoopTimer = 0;
                 }
 
-                spawnPlant++;
-                if (spawnPlant >= 2000) // Spawn a new plant every 20 seconds
+                spawnPlantTimer++;
+                if (spawnPlantTimer >= 2000 && spawnPlantStock >= 2) // Spawn a new plant every 20 seconds if spawn plant stock >= 1
                 {
                     get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
-                    spawnPlant = random.Next(0, 500);
+                    spawnPlantTimer = random.Next(0, 500);
+                    spawnPlantStock -= 2;
                 }
 
                 // If health is empty, animal dies
@@ -115,12 +116,7 @@ namespace EcosystemProject
                         if (item.GetType() == typeof(Poop)) 
                         {
                             get_simulation().Remove(item);
-                            //poopStock++;
-                            //if (poopStock > 5)
-                            //{
-                            //    newPlant();
-                            //    poopStock = 0;
-                            //}
+                            spawnPlantStock += 1;
                             Energy += 20;
                             if (Energy > 10)
                             {
@@ -135,40 +131,7 @@ namespace EcosystemProject
                     }
                 }
             }
-
-
-            //foreach (SimulationObject item in get_simulation().Objects)
-            //{
-            //    if (item.X >= (X - RootRadius) && get_simulation().objects[x].X <= (X + RootRadius))
-            //    {
-            //        if (get_simulation().objects[x].Y >= (Y - RootRadius) && get_simulation().objects[x].Y <= (Y + RootRadius))
-            //        {
-            //            if (get_simulation().objects[x] is Poop)
-            //            {
-                            //get_simulation().objects.RemoveAt(x);
-                            //poopStock++;
-                            //if (poopStock >= 3)
-                            //{
-                            //    newPlant();
-                            //    //get_simulation().objects.Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
-                            //    poopStock = 0;
-                            //}
-                            //Energy += 5;
-                            //if (Energy > 10)
-                            //{
-                            //    Health += 5;
-                            //    Energy = 10;
-                            //    if (Health > 10)
-                            //    {
-                            //        Health = 10;
-                            //    }
-                            //}
-            //            }
-            //        }
-            //}
-            //}
         }
-
         public void newPlant()
         {
             get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
