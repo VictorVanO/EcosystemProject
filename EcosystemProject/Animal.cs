@@ -1,5 +1,3 @@
-
-
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
