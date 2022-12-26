@@ -45,6 +45,7 @@ namespace EcosystemProject
             {
                 // If animal leaves the map, comes back
                 Move();
+                checkPlant();
 
                 if (Energy <= -10) // If animal has no energy
                 {
@@ -172,6 +173,56 @@ namespace EcosystemProject
         public void Attack(List<SimulationObject> item)
         {
             var objects = new List<SimulationObject>(item);
+        }
+        
+        public void checkPlant()
+        {
+            foreach (SimulationObject item in get_simulation().Objects)
+            {
+                if (item.X >= (X - VisionRadius) && item.X <= (X + VisionRadius))
+                {
+                    if (item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius))
+                    {
+                        if (item.GetType() == typeof(Plant))
+                        {
+                            if (item.X <= (X - ActionRadius) && item.X <= (X + ActionRadius))
+                            {
+                                nextMove = "Left";
+                            }
+                            else if (item.X >= (X - ActionRadius) && item.X >= (X + ActionRadius))
+                            {
+                                nextMove = "Right";
+                            }
+                            else if (item.X >= (X - ActionRadius) && item.X <= (X + ActionRadius))
+                            {
+                                if (item.Y <= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
+                                {
+                                    nextMove = "Up";
+                                }
+                                else if (item.Y >= (Y - ActionRadius) && item.Y >= (Y + ActionRadius))
+                                {
+                                    nextMove = "Down";
+                                }
+                                else if (item.Y >= (Y -ActionRadius) && item.Y <= (Y + ActionRadius))
+                                {
+                                    nextMove = "Stop";
+                                    get_simulation().Remove(item);
+                                }
+                            }
+                            Energy += 20;
+                            if (Energy > 10)
+                            {
+                                Health += 5;
+                                Energy = 10;
+                                if (Health > 10)
+                                {
+                                    Health = 10;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
