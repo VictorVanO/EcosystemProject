@@ -43,7 +43,7 @@ namespace EcosystemProject
             // If animal is alive
             if (isAlive)
             {
-                // If animal leaves the map, comes back
+                // the animal moves and search plants
                 Move();
                 checkPlant();
 
