@@ -7,10 +7,9 @@ namespace EcosystemProject
 {
     public class Animal : SimulationObject
     {
-        Simulation Simulation;
-
-        Random random = new System.Random();
         
+
+        Random random = new Random();
 
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
         String nextMove = "";
@@ -22,7 +21,7 @@ namespace EcosystemProject
         double bottomY = 640;
 
         int moveTimer = 0;
-       
+
         bool isAlive = true;
         int addMeat = 1;
 
@@ -35,25 +34,10 @@ namespace EcosystemProject
         public override void Update()
         {
             // If animal is alive
-            if(isAlive)
-            {   
+            if (isAlive)
+            {
                 // If animal leaves the map, comes back
-                if (X <= leftX)
-                {
-                    nextMove = "Right";
-                }
-                else if (X >= rightX)
-                {
-                    nextMove = "Left";
-                }
-                else if (Y <= topY)
-                {
-                    nextMove = "Down";
-                }
-                else if (Y >= bottomY)
-                {
-                    nextMove = "Up";
-                }
+                Move();
 
                 if (Energy <= -10) // If animal has no energy
                 {
@@ -66,36 +50,38 @@ namespace EcosystemProject
                 else // Or if animal has energy
                 {
 
-                poopTimer += 1;
-                Energy -= 0.01;
-                }
-                   
+                    poopTimer += 1;
+                    Energy -= 0.1;
                 }
 
-                poopTimer += 10;
-                if (poopTimer >= 1200) // Poop every 12 seconds
-                {
-                    get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
-                    poopTimer = 0;
-                }
+            }
+
+            poopTimer += 1;
+            if (poopTimer >= 1200) // Poop every 12 seconds
+            {
+                get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
+                poopTimer = 0;
             }
 
             // If health is empty, animal dies
             if (Health <= -10) { isAlive = false; }
 
             // If animal is dead, set the energy bar to empty and add a meat
-            if(isAlive == false)
+            if (isAlive == false)
             {
+                
                 Energy = -10;
                 if (addMeat == 1)
                 {
                     get_simulation().objects.Add(new Meat(X, Y, 10, get_simulation()));
                     addMeat = 0;
                     get_simulation().objects.Remove(new Animal(X, Y, 10, 10, 0, 0, get_simulation()));
+
                 }
             }
 
         }
+
 
         public override void Draw(ICanvas canvas)
         {
@@ -113,7 +99,6 @@ namespace EcosystemProject
                 canvas.StrokeColor = Colors.DarkGray;
                 canvas.StrokeSize = 3;
                 canvas.DrawLine((float)X - 10, (float)Y - 15, (float)X + 10, (float)Y - 15);
-
 
                 //Health bar
                 canvas.StrokeColor = Colors.DarkGreen;

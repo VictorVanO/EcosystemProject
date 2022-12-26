@@ -1,3 +1,4 @@
+
 using System;
 using System.Linq;
 namespace EcosystemProject
@@ -41,6 +42,7 @@ namespace EcosystemProject
                 
                 // If health is empty, animal dies
                 if (Health <= -10) { isAlive = false; }
+                
             }
             if (isAlive == false)
             {

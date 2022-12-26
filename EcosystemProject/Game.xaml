@@ -6,20 +6,23 @@
              Title="Game"
              BackgroundColor="ForestGreen"
              Shell.PresentationMode="NotAnimated"
-             Shell.NavBarIsVisible="false"
-             >
+             Shell.NavBarIsVisible="false">
             
 
     <ContentPage.Resources>
+        
         <drawable:Simulation x:Key="Simulation" />
     </ContentPage.Resources>
 
+
     <VerticalStackLayout>
+
         <GraphicsView 
                       x:Name="graphics"
                       Drawable="{StaticResource Simulation}"
                       HeightRequest="650"
                       WidthRequest="1400">
+
         </GraphicsView>
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Button
@@ -58,6 +61,8 @@
                 Clicked="AddPlantClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
+            
+
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
