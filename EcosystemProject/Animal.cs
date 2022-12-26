@@ -20,6 +20,9 @@ namespace EcosystemProject
         double rightX = 1390;
         double bottomY = 640;
 
+        float visionRadius;
+        float actionRadius;
+
         int moveTimer = 0;
 
         bool isAlive = true;
@@ -27,10 +30,14 @@ namespace EcosystemProject
 
         int poopTimer = 0;
 
-        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, 100, 30, simulation)
+        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, simulation)
         {
+            this.visionRadius = visionRadius;
+            this.actionRadius = actionRadius;
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
         }
+        public float VisionRadius { get { return this.visionRadius; } set { this.visionRadius = value; } }
+        public float ActionRadius { get { return this.actionRadius; } set { this.actionRadius = value; } }
         public override void Update()
         {
             // If animal is alive
@@ -72,7 +79,7 @@ namespace EcosystemProject
                 {
                     get_simulation().Add(new Meat(X, Y, 10, get_simulation()));
                     addMeat = 0;
-                    get_simulation().Remove(new Animal(X, Y, 10, 10, 0, 0, get_simulation()));
+                    get_simulation().Remove(new Animal(X, Y, 10, 10, 100, 30, get_simulation()));
                 }
             }
 
