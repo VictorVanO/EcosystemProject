@@ -49,18 +49,15 @@ namespace EcosystemProject
                 }
                 else // Or if animal has energy
                 {
-
-                    poopTimer += 1;
-                    Energy -= 0.1;
+                    Energy -= 0.02; // Lose energy every update
                 }
 
-            }
-
-            poopTimer += 1;
-            if (poopTimer >= 1200) // Poop every 12 seconds
-            {
-                get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
-                poopTimer = 0;
+                poopTimer += 1;
+                if (poopTimer >= 800) // Poop every 8 seconds
+                {
+                    get_simulation().Add(new Poop(X, Y, get_simulation()));
+                    poopTimer = 0;
+                }
             }
 
             // If health is empty, animal dies
@@ -73,10 +70,9 @@ namespace EcosystemProject
                 Energy = -10;
                 if (addMeat == 1)
                 {
-                    get_simulation().objects.Add(new Meat(X, Y, 10, get_simulation()));
+                    get_simulation().Add(new Meat(X, Y, 10, get_simulation()));
                     addMeat = 0;
-                    get_simulation().objects.Remove(new Animal(X, Y, 10, 10, 0, 0, get_simulation()));
-
+                    get_simulation().Remove(new Animal(X, Y, 10, 10, 0, 0, get_simulation()));
                 }
             }
 

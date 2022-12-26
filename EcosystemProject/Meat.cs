@@ -21,7 +21,7 @@ namespace EcosystemProject
                 exist = false;
                 if (addPoop == 1)
                 {
-                    get_simulation().objects.Add(new Poop(X, Y, get_simulation()));
+                    get_simulation().Add(new Poop(X, Y, get_simulation()));
                     addPoop = 0;
                 }
             }

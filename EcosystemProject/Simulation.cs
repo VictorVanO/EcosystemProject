@@ -8,7 +8,9 @@ namespace EcosystemProject
     
 	public class Simulation : IDrawable
     {
-        public List<SimulationObject> objects;
+        private List<SimulationObject> objects;
+
+        public List<SimulationObject> Objects { get { return new List<SimulationObject>(objects); } }
 
         Random random = new Random();
 
@@ -16,8 +18,11 @@ namespace EcosystemProject
         {
             objects = new List<SimulationObject>();
 
-            objects.Add(new Animal(200, 200, 10, 10, 0, 0, this));
-            objects.Add(new Animal(1000, 400, 10, 10, 0, 0, this));
+            objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
+            objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
+            objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
             objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
             
             
@@ -25,8 +30,7 @@ namespace EcosystemProject
         }
         public void Update()
         {
-            var tmp_objects = new List<SimulationObject>(objects);
-            foreach (SimulationObject drawable in tmp_objects)
+            foreach (SimulationObject drawable in Objects)
             {
                 drawable.Update();
                 
@@ -38,6 +42,16 @@ namespace EcosystemProject
             {
                 drawable.Draw(canvas);
             }
+        }
+
+        public void Add(SimulationObject obj)
+        {
+            objects.Add(obj);
+        }
+
+        public void Remove(SimulationObject obj)
+        {
+            objects.Remove(obj);
         }
     }
     

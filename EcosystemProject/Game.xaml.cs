@@ -45,10 +45,10 @@ public partial class Game : ContentPage
 
     private void AddAnimalClicked(object sender, EventArgs e)
     {
-        simulation.objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
+        simulation.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
     }
     private void AddPlantClicked(object sender, EventArgs e)
     {
-        simulation.objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
+        simulation.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
     }
 }
