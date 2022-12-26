@@ -12,12 +12,23 @@ namespace EcosystemProject
         bool isAlive = true;
         int addPoop = 1;
         int checkPoopTimer = 0;
+        float rootRadius ;
+        float semisRadius;
 
         int spawnPlantTimer = 0;
         int spawnPlantStock = 0;
-        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, 150, 60, 0, 0, simulation)
+        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, 0, 0, simulation)
         {
+            this.rootRadius = rootRadius;
+            this.semisRadius = semisRadius;
         }
+        public float RootRadius { get { return this.rootRadius; } set { this.rootRadius = value; } }
+        public float SemisRadius { get { return this.semisRadius; } set { this.semisRadius = value; } }
+
+
+
+
+
         public override void Update()
         {
             if (isAlive)
@@ -48,14 +59,14 @@ namespace EcosystemProject
                 spawnPlantTimer++;
                 if (spawnPlantTimer >= 2000 && spawnPlantStock >= 2) // Spawn a new plant every 20 seconds if spawn plant stock >= 1
                 {
-                    get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
+                    newPlant();
                     spawnPlantTimer = random.Next(0, 500);
                     spawnPlantStock -= 2;
                 }
 
                 // If health is empty, animal dies
                 if (Health <= -10) { isAlive = false; }
-                
+
             }
             if (isAlive == false)
             {
@@ -115,7 +126,7 @@ namespace EcosystemProject
                 {
                     if (item.Y >= (Y - RootRadius) && item.Y <= (Y + RootRadius))
                     {
-                        if (item.GetType() == typeof(Poop)) 
+                        if (item.GetType() == typeof(Poop))
                         {
                             get_simulation().Remove(item);
                             spawnPlantStock += 1;
@@ -136,7 +147,8 @@ namespace EcosystemProject
         }
         public void newPlant()
         {
-            get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 0, 0, get_simulation()));
+            get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 160, 50, get_simulation()));
         }
     }
 }
+

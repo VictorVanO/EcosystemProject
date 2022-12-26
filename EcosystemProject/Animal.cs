@@ -27,7 +27,7 @@ namespace EcosystemProject
 
         int poopTimer = 0;
 
-        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, simulation)
+        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, 100, 30, simulation)
         {
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
         }

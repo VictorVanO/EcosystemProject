@@ -8,17 +8,15 @@ namespace EcosystemProject
 		Color color;
 		double x, y, health, energy;
 
-        float rootRadius, semisRadius, visionRadius;
+        float visionRadius;
         float actionRadius = 50;
-        public DrawableObject(Color color, double x, double y, double health, double energy, float rootRadius, float semisRadius, float visionRadius, float actionRadius)
+        public DrawableObject(Color color, double x, double y, double health, double energy, float visionRadius, float actionRadius)
         {
 			this.color = color;
 			this.x = x;
 			this.y = y;
             this.health = health;
-			this.energy = energy;
-            this.rootRadius = rootRadius;
-            this.semisRadius = semisRadius;
+            this.energy = energy;
             this.visionRadius = visionRadius;
             this.actionRadius = actionRadius;
         }
@@ -28,8 +26,6 @@ namespace EcosystemProject
         public double Y { get { return this.y; } set { this.y = value; } }
         public double Health { get { return this.health; } set { this.health = value; } }
         public double Energy { get { return this.energy; } set { this.energy = value; } }
-        public float RootRadius { get { return this.rootRadius; } set { this.rootRadius = value; } }
-        public float SemisRadius { get { return this.semisRadius; } set { this.semisRadius = value; } }
         public float VisionRadius { get { return this.visionRadius; } set { this.visionRadius = value; } }
         public float ActionRadius { get { return this.actionRadius; } set { this.actionRadius = value; } }
 

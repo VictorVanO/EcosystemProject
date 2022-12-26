@@ -21,9 +21,9 @@ namespace EcosystemProject
             objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
             objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
             objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, this));
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
+            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
             
             
 

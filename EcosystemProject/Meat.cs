@@ -5,7 +5,7 @@ namespace EcosystemProject
     {
         bool exist = true;
         int addPoop = 1;
-        public Meat(double x, double y, double health, Simulation simulation) : base(Colors.IndianRed, x, y, 10, 0, 0, 0, 0, 0, simulation)
+        public Meat(double x, double y, double health, Simulation simulation) : base(Colors.IndianRed, x, y, 10, 0, 0, 0, simulation)
         {
 
         }

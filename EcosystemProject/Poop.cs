@@ -4,7 +4,7 @@ namespace EcosystemProject
     public class Poop : SimulationObject
     {
         bool exist = true;
-        public Poop(double x, double y, Simulation simulation) : base(Colors.SaddleBrown, x, y, 0, 0, 0, 0, 0, 0, simulation)
+        public Poop(double x, double y, Simulation simulation) : base(Colors.SaddleBrown, x, y, 0, 0, 0, 0, simulation)
         {
 
         }
