@@ -4,16 +4,18 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
+
 namespace EcosystemProject
 {
     public class Animal : SimulationObject
     {
+        
+
         Random random = new Random();
         string[] genders = { "M", "F" };
 
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
-        string nextMove = "";
-        int moveTimer = 0;
+        String nextMove = "";
         int moveSpeed = 1;
 
         double leftX = 10;
@@ -21,21 +23,33 @@ namespace EcosystemProject
         double rightX = 1390;
         double bottomY = 640;
 
+        float visionRadius;
+        float actionRadius;
+
+        
+
+
         bool isAlive = true;
         int addMeat = 1;
-
+        int moveTimer = 0;
         int poopTimer = 0;
+        int attackTimer = 0;
 
-        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, string gender, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, gender, simulation)
+        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, simulation)
         {
+            this.visionRadius = visionRadius;
+            this.actionRadius = actionRadius;
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
         }
+        public float VisionRadius { get { return this.visionRadius; } set { this.visionRadius = value; } }
+        public float ActionRadius { get { return this.actionRadius; } set { this.actionRadius = value; } }
         public override void Update()
         {
             // If animal is alive
-            if(isAlive)
+            if (isAlive)
             {
-                Move(); // Call the move function
+                Move();
+                CheckAnimal();
 
                 if (Energy <= -10) // If animal has no energy
                 {
@@ -62,35 +76,28 @@ namespace EcosystemProject
             if (Health <= -10) { isAlive = false; }
 
             // If animal is dead, set the energy bar to empty and add a meat
-            if(isAlive == false)
+            if (isAlive == false)
             {
+                
                 Energy = -10;
                 if (addMeat == 1)
                 {
                     get_simulation().Add(new Meat(X, Y, 10, get_simulation()));
                     addMeat = 0;
-                    get_simulation().Remove(new Animal(X, Y, 10, 10, 0, 0, genders[random.Next(genders.Length)], get_simulation()));
+                    get_simulation().Remove(new Animal(X, Y, 10, 10, 0, 0, get_simulation()));
                 }
             }
 
         }
 
+
         public override void Draw(ICanvas canvas)
         {
             if (isAlive)
             {
-                if (Gender == "M")
-                {
-                    //Animal circle
-                    canvas.FillColor = Color;
-                    canvas.FillCircle(new Point(X, Y), 10.0);
-                }
-                else
-                {
-                    //Animal circle
-                    canvas.FillColor = Colors.Pink;
-                    canvas.FillCircle(new Point(X, Y), 10.0);
-                }
+                //Animal circle
+                canvas.FillColor = Color;
+                canvas.FillCircle(new Point(X, Y), 10.0);
 
                 //Health bar shadow
                 canvas.StrokeColor = Colors.DarkGray;
@@ -100,7 +107,6 @@ namespace EcosystemProject
                 canvas.StrokeColor = Colors.DarkGray;
                 canvas.StrokeSize = 3;
                 canvas.DrawLine((float)X - 10, (float)Y - 15, (float)X + 10, (float)Y - 15);
-
 
                 //Health bar
                 canvas.StrokeColor = Colors.DarkGreen;
@@ -167,10 +173,102 @@ namespace EcosystemProject
                 moveTimer = 0;
             }
         }
-
-        public void Attack(List<SimulationObject> item)
+        public void Approaching(SimulationObject item)
         {
-            var objects = new List<SimulationObject>(item);
+        
+            if (item.X <= (X - ActionRadius) && item.X <= (X + ActionRadius))
+            {
+                nextMove = "Left";
+            }
+            else if (item.X >= (X - ActionRadius) && item.X >= (X + ActionRadius))
+            {
+                nextMove = "Right";
+            }
+            else if (item.X >= (X - ActionRadius) && item.X <= (X + ActionRadius))
+            {
+                if (item.Y <= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
+                {
+                    nextMove = "Up";
+                }
+                else if (item.Y >= (Y - ActionRadius) && item.Y >= (Y + ActionRadius))
+                {
+                    nextMove = "Down";
+                }
+                else if (item.Y >= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
+                {
+                    nextMove = "Stop";
+                    Attack(item);
+
+                }
+            }
         }
+        public void Attack(SimulationObject item)
+        {
+            attackTimer++;
+            poopTimer = 0;
+
+            if (attackTimer == 100)
+            {
+                item.Health -= 4;
+                attackTimer = 0;
+                if (item.Health <= -10)
+                {
+                    get_simulation().Remove(item);
+
+                    Energy += 20;
+                    if (Energy > 10)
+                    {
+                        Health += 5;
+                        Energy = 10;
+                        if (Health > 10)
+                        {
+                            Health = 10;
+                        }
+                    }
+                }
+
+            }
+        }
+        public void CheckPlant()
+        {
+            foreach (SimulationObject item in get_simulation().Objects)
+            {
+                if (item.X >= (X - VisionRadius) && item.X <= (X + VisionRadius))
+                {
+                    if (item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius))
+                    {
+                        if (item.GetType() == typeof(Plant))
+                        {
+                            Approaching(item);
+
+
+
+
+                        }
+                    }
+                }
+            }
+        }
+        public void CheckAnimal()
+        {
+            foreach (SimulationObject item in get_simulation().Objects)
+            {
+                if (item.X >= (X - VisionRadius)  && item.X <= (X + VisionRadius) && item.X <= (X - 5) || item.X >= (X - VisionRadius) && item.X <= (X + VisionRadius) && item.X >= (X + 5))
+                {
+                    if (item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius) && item.Y <= (Y - 5) || item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius) && item.Y >= (Y + 5))
+                    {
+                        if (item.GetType() == typeof(Animal))
+                        {
+                            Approaching(item);
+
+
+
+
+                        }
+                    }
+                }
+            }
+        }
+        
     }
 }

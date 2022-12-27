@@ -2,8 +2,10 @@
 //using System.Threading.Tasks;
 //using Microsoft.Maui.Controls;
 
+
 namespace EcosystemProject
 {
+    
 	public class Simulation : IDrawable
     {
         private List<SimulationObject> objects;
@@ -28,6 +30,7 @@ namespace EcosystemProject
             foreach (SimulationObject drawable in Objects)
             {
                 drawable.Update();
+                
             }
         }
         public void Draw(ICanvas canvas, RectF dirtyRect)
@@ -47,5 +50,7 @@ namespace EcosystemProject
         {
             objects.Remove(obj);
         }
+        
     }
+    
 }

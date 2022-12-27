@@ -70,6 +70,6 @@ public partial class Game : ContentPage
     }
     private void AddPlantClicked(object sender, EventArgs e)
     {
-        simulation.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 0, 0, simulation));
+        simulation.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, simulation));
     }
 }
