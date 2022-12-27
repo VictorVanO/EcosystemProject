@@ -1,7 +1,9 @@
+
 using Microsoft.Maui.Graphics;
 using System;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
+
 
 namespace EcosystemProject
 {
@@ -23,12 +25,14 @@ namespace EcosystemProject
         float visionRadius;
         float actionRadius;
 
-        int moveTimer = 0;
+        
+
 
         bool isAlive = true;
         int addMeat = 1;
-
+        int moveTimer = 0;
         int poopTimer = 0;
+        int attackTimer = 0;
 
         public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, simulation)
         {
@@ -45,7 +49,7 @@ namespace EcosystemProject
             {
                 // the animal moves and search plants
                 Move();
-                checkPlant();
+                CheckAnimal();
 
                 if (Energy <= -10) // If animal has no energy
                 {
@@ -169,13 +173,63 @@ namespace EcosystemProject
                 moveTimer = 0;
             }
         }
-
-        public void Attack(List<SimulationObject> item)
+        public void Approaching(SimulationObject item)
         {
-            var objects = new List<SimulationObject>(item);
-        }
         
-        public void checkPlant()
+            if (item.X <= (X - ActionRadius) && item.X <= (X + ActionRadius))
+            {
+                nextMove = "Left";
+            }
+            else if (item.X >= (X - ActionRadius) && item.X >= (X + ActionRadius))
+            {
+                nextMove = "Right";
+            }
+            else if (item.X >= (X - ActionRadius) && item.X <= (X + ActionRadius))
+            {
+                if (item.Y <= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
+                {
+                    nextMove = "Up";
+                }
+                else if (item.Y >= (Y - ActionRadius) && item.Y >= (Y + ActionRadius))
+                {
+                    nextMove = "Down";
+                }
+                else if (item.Y >= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
+                {
+                    nextMove = "Stop";
+                    Attack(item);
+
+                }
+            }
+        }
+        public void Attack(SimulationObject item)
+        {
+            attackTimer++;
+            poopTimer = 0;
+
+            if (attackTimer == 100)
+            {
+                item.Health -= 4;
+                attackTimer = 0;
+                if (item.Health <= -10)
+                {
+                    get_simulation().Remove(item);
+
+                    Energy += 20;
+                    if (Energy > 10)
+                    {
+                        Health += 5;
+                        Energy = 10;
+                        if (Health > 10)
+                        {
+                            Health = 10;
+                        }
+                    }
+                }
+
+            }
+        }
+        public void CheckPlant()
         {
             foreach (SimulationObject item in get_simulation().Objects)
             {
@@ -185,44 +239,36 @@ namespace EcosystemProject
                     {
                         if (item.GetType() == typeof(Plant))
                         {
-                            if (item.X <= (X - ActionRadius) && item.X <= (X + ActionRadius))
-                            {
-                                nextMove = "Left";
-                            }
-                            else if (item.X >= (X - ActionRadius) && item.X >= (X + ActionRadius))
-                            {
-                                nextMove = "Right";
-                            }
-                            else if (item.X >= (X - ActionRadius) && item.X <= (X + ActionRadius))
-                            {
-                                if (item.Y <= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
-                                {
-                                    nextMove = "Up";
-                                }
-                                else if (item.Y >= (Y - ActionRadius) && item.Y >= (Y + ActionRadius))
-                                {
-                                    nextMove = "Down";
-                                }
-                                else if (item.Y >= (Y -ActionRadius) && item.Y <= (Y + ActionRadius))
-                                {
-                                    nextMove = "Stop";
-                                    get_simulation().Remove(item);
-                                }
-                            }
-                            Energy += 20;
-                            if (Energy > 10)
-                            {
-                                Health += 5;
-                                Energy = 10;
-                                if (Health > 10)
-                                {
-                                    Health = 10;
-                                }
-                            }
+                            Approaching(item);
+
+
+
+
                         }
                     }
                 }
             }
         }
+        public void CheckAnimal()
+        {
+            foreach (SimulationObject item in get_simulation().Objects)
+            {
+                if (item.X >= (X - VisionRadius)  && item.X <= (X + VisionRadius) && item.X <= (X - 5) || item.X >= (X - VisionRadius) && item.X <= (X + VisionRadius) && item.X >= (X + 5))
+                {
+                    if (item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius) && item.Y <= (Y - 5) || item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius) && item.Y >= (Y + 5))
+                    {
+                        if (item.GetType() == typeof(Animal))
+                        {
+                            Approaching(item);
+
+
+
+
+                        }
+                    }
+                }
+            }
+        }
+        
     }
 }

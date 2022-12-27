@@ -149,6 +149,7 @@ namespace EcosystemProject
         {
             get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 160, 50, get_simulation()));
         }
+       
     }
 }
 
