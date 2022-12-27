@@ -12,7 +12,7 @@ namespace EcosystemProject
         bool isAlive = true;
         int addPoop = 1;
         int checkPoopTimer = 0;
-        float rootRadius ;
+        float rootRadius;
         float semisRadius;
 
         int spawnPlantTimer = 0;
@@ -24,10 +24,6 @@ namespace EcosystemProject
         }
         public float RootRadius { get { return this.rootRadius; } set { this.rootRadius = value; } }
         public float SemisRadius { get { return this.semisRadius; } set { this.semisRadius = value; } }
-
-
-
-
 
         public override void Update()
         {
