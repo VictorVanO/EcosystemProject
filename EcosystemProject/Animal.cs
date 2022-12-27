@@ -9,6 +9,7 @@ namespace EcosystemProject
     public class Animal : SimulationObject
     {
         Random random = new Random();
+        string[] genders = { "M", "F" };
 
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
         string nextMove = "";
@@ -25,7 +26,7 @@ namespace EcosystemProject
 
         int poopTimer = 0;
 
-        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, simulation)
+        public Animal(double x, double y, double health, double energy, float visionRadius, float actionRadius, string gender, Simulation simulation) : base(Colors.Red, x, y, health, energy, 0, 0, 100, 30, gender, simulation)
         {
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
         }
@@ -34,7 +35,7 @@ namespace EcosystemProject
             // If animal is alive
             if(isAlive)
             {
-                Move();
+                Move(); // Call the move function
 
                 if (Energy <= -10) // If animal has no energy
                 {
@@ -68,7 +69,7 @@ namespace EcosystemProject
                 {
                     get_simulation().Add(new Meat(X, Y, 10, get_simulation()));
                     addMeat = 0;
-                    get_simulation().Remove(new Animal(X, Y, 10, 10, 0, 0, get_simulation()));
+                    get_simulation().Remove(new Animal(X, Y, 10, 10, 0, 0, genders[random.Next(genders.Length)], get_simulation()));
                 }
             }
 
@@ -78,9 +79,18 @@ namespace EcosystemProject
         {
             if (isAlive)
             {
-                //Animal circle
-                canvas.FillColor = Color;
-                canvas.FillCircle(new Point(X, Y), 10.0);
+                if (Gender == "M")
+                {
+                    //Animal circle
+                    canvas.FillColor = Color;
+                    canvas.FillCircle(new Point(X, Y), 10.0);
+                }
+                else
+                {
+                    //Animal circle
+                    canvas.FillColor = Colors.Pink;
+                    canvas.FillCircle(new Point(X, Y), 10.0);
+                }
 
                 //Health bar shadow
                 canvas.StrokeColor = Colors.DarkGray;

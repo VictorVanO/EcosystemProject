@@ -35,6 +35,18 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
             <Button
+                x:Name="SpeedBtn"
+                Text="x1"
+                FontSize="28"
+                TextColor="Black"
+                BorderColor="#262626"
+                BorderWidth="2"
+                BackgroundColor="White"
+                SemanticProperties.Hint="Change the simulation speed"
+                Clicked="SpeedClicked"
+                HorizontalOptions="Center"
+                VerticalOptions="Start" />
+            <Button
                 x:Name="AddAnimalBtn"
                 Text="ADD ANIMAL"
                 FontSize="28"

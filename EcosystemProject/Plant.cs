@@ -14,7 +14,7 @@ namespace EcosystemProject
 
         int spawnPlantTimer = 0;
         int spawnPlantStock = 0;
-        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, 150, 60, 0, 0, simulation)
+        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, 150, 80, 0, 0, "", simulation)
         {
         }
         public override void Update()

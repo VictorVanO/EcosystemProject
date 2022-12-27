@@ -5,7 +5,7 @@ namespace EcosystemProject
     {
         bool exist = true;
         int addPoop = 1;
-        public Meat(double x, double y, double health, Simulation simulation) : base(Colors.IndianRed, x, y, 10, 0, 0, 0, 0, 0, simulation)
+        public Meat(double x, double y, double health, Simulation simulation) : base(Colors.IndianRed, x, y, 10, 0, 0, 0, 0, 0, "",simulation)
         {
 
         }
@@ -33,7 +33,7 @@ namespace EcosystemProject
             {
                 // Draw Meat
                 canvas.FillColor = Color;
-                canvas.FillCircle(new Point((float)X, (float)Y), 6.0);
+                canvas.FillCircle(new Point((float)X, (float)Y), 7.0);
 
                 //Health bar shadow
                 canvas.StrokeColor = Colors.DarkGray;
