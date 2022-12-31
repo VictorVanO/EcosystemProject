@@ -4,7 +4,7 @@ namespace EcosystemProject
     public abstract class SimulationObject : DrawableObject
     {
         private Simulation simulation;
-        public SimulationObject(Color color, double x, double y, double health, double energy, float rootRadius, float semisRadius, float visionRadius, float actionRadius, string gender, Simulation simulation) : base(color, x, y, health, energy, rootRadius, semisRadius, visionRadius, actionRadius, gender)
+        public SimulationObject(Color color, double x, double y, double health, double energy, string gender, Simulation simulation) : base(color, x, y, health, energy, gender)
         { 
             this.simulation = simulation;
         }
