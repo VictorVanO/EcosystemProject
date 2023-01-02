@@ -7,22 +7,17 @@ namespace EcosystemProject
 	{
 		Color color;
 		double x, y, health, energy;
-
-        //float rootRadius, semisRadius;
-        float visionRadius;
-        float actionRadius = 50;
-        string gender = "";
-        public DrawableObject(Color color, double x, double y, double health, double energy,string gender)
+        string gender;
+        Type classe;
+        public DrawableObject(Type classe, Color color, double x, double y, double health, double energy,string gender)
         {
 			this.color = color;
 			this.x = x;
 			this.y = y;
             this.health = health;
 			this.energy = energy;
-            //this.rootRadius = rootRadius;
-            //this.semisRadius = semisRadius;
-           
             this.gender = gender;
+            this.classe = classe;
         }
 
 		public Color Color { get { return this.color; } }
@@ -30,10 +25,8 @@ namespace EcosystemProject
         public double Y { get { return this.y; } set { this.y = value; } }
         public double Health { get { return this.health; } set { this.health = value; } }
         public double Energy { get { return this.energy; } set { this.energy = value; } }
-            //public float RootRadius { get { return this.rootRadius; } set { this.rootRadius = value; } }
-            //public float SemisRadius { get { return this.semisRadius; } set { this.semisRadius = value; } }
-       
         public string Gender { get { return this.gender; } set { this.gender = value; } }
+        public Type Classe { get { return this.classe; } set { this.classe = value; } }
 
         public abstract void Draw(ICanvas canvas);	
     }

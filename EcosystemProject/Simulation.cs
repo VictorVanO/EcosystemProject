@@ -18,12 +18,16 @@ namespace EcosystemProject
         {
             objects = new List<SimulationObject>();
 
-            objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, "M", this));
-            objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, "M", this));
-            objects.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, "F", this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
-            objects.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
+            Add(new Animal(typeof(Carnivorous), Colors.Red, random.Next(1000, 1200), random.Next(500, 550), 10, 10, 100, 30, "M", this));
+            Add(new Animal(typeof(Herbivorous), Colors.Red, random.Next(1000, 1200), random.Next(500, 550), 10, 10, 100, 30, "F", this)); 
+
+            //Add(new Animal(typeof(Herbivorous), Colors.Red, random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, "M", this));
+            //Add(new Animal(typeof(Herbivorous), Colors.Red, random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, "F", this));
+
+
+            //Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
+            //Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
+            //Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, this));
         }
         public void Update()
         {

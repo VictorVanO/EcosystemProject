@@ -17,7 +17,7 @@ namespace EcosystemProject
 
         int spawnPlantTimer = 0;
         int spawnPlantStock = 0;
-        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(Colors.Green, x, y, health, energy, "", simulation)
+        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(typeof(Plant),Colors.Green, x, y, health, energy, "", simulation)
         {
             this.rootRadius = rootRadius;
             this.semisRadius = semisRadius;

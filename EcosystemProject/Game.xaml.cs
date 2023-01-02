@@ -12,6 +12,7 @@ public partial class Game : ContentPage
 
     Random random = new Random();
     string[] genders = { "M", "F" };
+    Type[] Classes = { typeof(Carnivorous), typeof(Herbivorous) };
     public Game()
 	{
 		InitializeComponent();
@@ -66,7 +67,7 @@ public partial class Game : ContentPage
 
     private void AddAnimalClicked(object sender, EventArgs e)
     {
-        simulation.Add(new Animal(random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, genders[random.Next(genders.Length)], simulation));
+        simulation.Add(new Animal(Classes[random.Next(Classes.Length)],Colors.Red,random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, genders[random.Next(genders.Length)], simulation));
     }
     private void AddPlantClicked(object sender, EventArgs e)
     {
