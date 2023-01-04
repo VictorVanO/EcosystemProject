@@ -1,3 +1,4 @@
+
 using System.Security.Cryptography.X509Certificates;
 
 namespace EcosystemProject;
@@ -8,14 +9,19 @@ public partial class Game : ContentPage
     Simulation simulation;
     bool isRunning = true;
 
-    int gameSpeed = 10;
+    int gameSpeed = 1;
+   
 
     Random random = new Random();
     string[] genders = { "M", "F" };
     Type[] Classes = { typeof(Carnivorous), typeof(Herbivorous) };
-    public Game()
+    int activate = 1;
+    SimulationObject Item;
+
+public Game()
 	{
-		InitializeComponent();
+        
+        InitializeComponent();
 
         simulation = Resources["Simulation"] as Simulation;
 
@@ -23,6 +29,7 @@ public partial class Game : ContentPage
         timer.Interval = TimeSpan.FromMilliseconds(gameSpeed);
         timer.Tick += this.OnTimeEvent;
         timer.Start();
+        
     }
     private void OnTimeEvent(object source, EventArgs e)
     {
@@ -67,10 +74,39 @@ public partial class Game : ContentPage
 
     private void AddAnimalClicked(object sender, EventArgs e)
     {
-        simulation.Add(new Animal(Classes[random.Next(Classes.Length)],Colors.Red,random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, genders[random.Next(genders.Length)], simulation));
+        foreach (SimulationObject item in simulation.Objects)
+        {
+            Item = item;
+        }
+        simulation.Add(new Animal(Classes[random.Next(Classes.Length)],Colors.Red,random.Next(100, 1400), random.Next(100, 550), 10, 10, 100, 30, genders[random.Next(genders.Length)],"No", simulation, Item.Radius));
     }
     private void AddPlantClicked(object sender, EventArgs e)
     {
-        simulation.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, simulation));
+        foreach (SimulationObject item in simulation.Objects)
+        {
+            Item = item;
+        }
+        simulation.Add(new Plant(random.Next(100, 1400), random.Next(100, 550), 10, 10, 160, 50, simulation,Item.Radius ));
+    }
+    private void Showhitboxes(object sender, EventArgs e)
+    {
+        if (activate == 1)
+        { 
+            foreach (SimulationObject item in simulation.Objects)
+            {
+                item.Radius = 1;
+            }
+            Showbtn.Text = "Hide";
+            activate = 0;
+        }
+        else if (activate == 0)
+        {
+            foreach (SimulationObject item in simulation.Objects)
+            {
+                item.Radius = 0;
+            }
+            Showbtn.Text = "Show";
+            activate = 1;
+        }
     }
 }

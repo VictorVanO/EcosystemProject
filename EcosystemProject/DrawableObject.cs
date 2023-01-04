@@ -28,6 +28,6 @@ namespace EcosystemProject
         public string Gender { get { return this.gender; } set { this.gender = value; } }
         public Type Classe { get { return this.classe; } set { this.classe = value; } }
 
-        public abstract void Draw(ICanvas canvas);	
+        public abstract void Draw(ICanvas canvas);
     }
 }

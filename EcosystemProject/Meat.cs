@@ -5,7 +5,7 @@ namespace EcosystemProject
     {
         bool exist = true;
         int addPoop = 1;
-        public Meat(double x, double y, double health, Simulation simulation) : base(typeof(Meat),Colors.IndianRed, x, y, 10, 0, "",simulation)
+        public Meat(double x, double y, double health, Simulation simulation,float radius) : base(typeof(Meat),Colors.IndianRed, x, y, 10, 0, "",simulation,radius, "")
         {
 
         }
@@ -21,7 +21,7 @@ namespace EcosystemProject
                 exist = false;
                 if (addPoop == 1)
                 {
-                    get_simulation().Add(new Poop(X, Y, get_simulation()));
+                    get_simulation().Add(new Poop(X, Y, get_simulation(),Radius));
                     addPoop = 0;
                 }
             }

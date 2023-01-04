@@ -17,7 +17,7 @@ namespace EcosystemProject
 
         int spawnPlantTimer = 0;
         int spawnPlantStock = 0;
-        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation) : base(typeof(Plant),Colors.Green, x, y, health, energy, "", simulation)
+        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation,float radius) : base(typeof(Plant),Colors.Green, x, y, health, energy, "", simulation, radius,"")
         {
             this.rootRadius = rootRadius;
             this.semisRadius = semisRadius;
@@ -69,7 +69,7 @@ namespace EcosystemProject
                 Energy = -10;
                 if (addPoop == 1)
                 {
-                    get_simulation().Add(new Poop(X, Y, get_simulation()));
+                    get_simulation().Add(new Poop(X, Y, get_simulation(), Radius));
                     addPoop = 0;
                 }
             }
@@ -104,11 +104,11 @@ namespace EcosystemProject
 
                 //Zone semis
                 canvas.StrokeColor = Colors.DarkGreen;
-                canvas.DrawCircle((float)X, (float)Y, SemisRadius);
+                canvas.DrawCircle((float)X, (float)Y, Radius * SemisRadius);
 
                 //Zone root
                 canvas.StrokeColor = Colors.Brown;
-                canvas.DrawCircle((float)X, (float)Y, RootRadius);
+                canvas.DrawCircle((float)X, (float)Y, Radius * RootRadius);
             }
         }
 
@@ -143,7 +143,7 @@ namespace EcosystemProject
         }
         public void newPlant()
         {
-            get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 160, 50, get_simulation()));
+            get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 160, 50, get_simulation(),Radius));
         }
        
     }

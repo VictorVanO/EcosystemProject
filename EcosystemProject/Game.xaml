@@ -73,6 +73,18 @@
                 Clicked="AddPlantClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
+            <Button
+                x:Name="Showbtn"
+                Text="Show"
+                FontSize="28"
+                TextColor="Red"
+                BorderColor="#262626"
+                BorderWidth="2"
+                BackgroundColor="White"
+                SemanticProperties.Hint="Show hitboxes of the creatures"
+                Clicked="Showhitboxes"
+                HorizontalOptions="Center"
+                VerticalOptions="Start" />
             
 
         </HorizontalStackLayout>

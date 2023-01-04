@@ -1,10 +1,10 @@
 
+
 using Microsoft.Maui.Graphics;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
-
 
 namespace EcosystemProject
 {
@@ -35,22 +35,26 @@ namespace EcosystemProject
         int poopTimer = 0;
         int attackTimer = 0;
         int ReproductTimer = 0;
-        string Ready = "No";
+        int readyTimer = 0;
+        
 
-        public Animal(Type classe, Color color, double x, double y, double health, double energy, float visionRadius, float actionRadius, string gender, Simulation simulation) : base(classe,color, x, y, health, energy, gender, simulation)
+        public Animal(Type classe, Color color, double x, double y, double health, double energy, float visionRadius, float actionRadius, string gender,string Ready, Simulation simulation, float radius) : base(classe,color, x, y, health, energy, gender, simulation, radius,Ready)
         {
             this.visionRadius = visionRadius;
             this.actionRadius = actionRadius;
+            
+            
             
             nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
         }
 
         public float VisionRadius { get { return this.visionRadius; } set { this.visionRadius = value; } }
         public float ActionRadius { get { return this.actionRadius; } set { this.actionRadius = value; } }
+        
        
         public override void Update()
         {
-            // If animal is alive
+
             if (isAlive)
             {
                 Move();
@@ -70,13 +74,13 @@ namespace EcosystemProject
                 }
                 else // Or if animal has energy
                 {
-                    Energy -= 0.005; // Lose energy every update
+                    Energy -= 0.02; // Lose energy every update
                 }
 
                 poopTimer += 1;
                 if (poopTimer >= 800) // Poop every 8 seconds
                 {
-                    get_simulation().Add(new Poop(X, Y, get_simulation()));
+                    get_simulation().Add(new Poop(X, Y, get_simulation(), Radius));
                     poopTimer = 0;
                 }
             }
@@ -90,9 +94,10 @@ namespace EcosystemProject
                 Energy = -10;
                 if (addMeat == 1)
                 {
-                    get_simulation().Add(new Meat(X, Y, 10, get_simulation()));
+                    get_simulation().Add(new Meat(X, Y, 10, get_simulation(), Radius));
                     addMeat = 0;
-                    get_simulation().Remove(new Animal(Classe,Color,X, Y, 10, 10, 0, 0, Gender, get_simulation()));
+                    get_simulation().Remove(new Animal(Classe,Color,X, Y, Health, Energy, VisionRadius, ActionRadius, Gender ,ready, get_simulation(), Radius));
+                    ready = "No";
                 }
             }
 
@@ -149,11 +154,31 @@ namespace EcosystemProject
 
                 //Zone action
                 canvas.StrokeColor = Colors.Red;
-                canvas.DrawCircle((float)X, (float)Y, ActionRadius);
+                canvas.DrawCircle((float)X, (float)Y, Radius * ActionRadius);
 
                 //Zone vision
-                canvas.StrokeColor = Colors.LightBlue;
-                canvas.DrawCircle((float)X, (float)Y, VisionRadius);
+                canvas.StrokeColor = Colors.White;
+                canvas.DrawCircle((float)X, (float)Y, Radius * VisionRadius);
+
+                if (ready == "Yes")
+                {
+                    readyTimer++;
+                    canvas.FillColor = Colors.HotPink;
+                    canvas.FillCircle(new Point(X, Y-30), 4.0);
+                    if (readyTimer == 1000)
+                    {
+                        canvas.FillColor = Colors.ForestGreen;
+                        canvas.FillCircle(new Point(X, Y - 30), 4.0);
+                        readyTimer = 0;
+                        ready = "No";
+                        
+                    }
+                }
+                else if(ready == "No")
+                {}
+
+                //canvas.StrokeColor = Colors.ForestGreen;
+                //canvas.DrawLine(0 , 0, 1000, 1000);
             }
         }
 
@@ -234,7 +259,7 @@ namespace EcosystemProject
         public void nigerooo(SimulationObject item)
         {
 
-            moveSpeed = 2;
+            
 
             if (item.X <= (X - ActionRadius) && item.X <= (X + ActionRadius))
             {
@@ -270,7 +295,7 @@ namespace EcosystemProject
                 if (item.Health <= -10)
                 {
                     get_simulation().Remove(item);
-                    get_simulation().Add(new Meat(item.X, item.Y, 10, get_simulation()));
+                    get_simulation().Add(new Meat(item.X, item.Y, 10, get_simulation(), Radius));
                 }
 
             }
@@ -291,6 +316,7 @@ namespace EcosystemProject
                 item.Health -= 5;
                 attackTimer = 0;
                 Energy += 6;
+                ready = "Yes";
                     
                 if (Energy > 10)
                 {
@@ -308,30 +334,35 @@ namespace EcosystemProject
                 }
                 if (item.Health <= -10)
                 {
+                    
                     get_simulation().Remove(item);
-                    Ready = "Yes";
+                    ready = "Yes";
+                    readyTimer = 0;
+
                 }
             }
         }
         public void Reproduct(SimulationObject item,Type Classe)
         {
+            
             Approaching(item);
             poopTimer = 0;
-            ReproductTimer++;
-            if (nextMove == "Stop" && ReproductTimer >= 500 )
-            {
-                if(Gender == "F")
-                {
-                    
-                    get_simulation().Add(new Animal(Classe, Color, X, Y, 10, 10, 100, 30, genders[random.Next(genders.Length)], get_simulation()));
+            
 
-                    ReproductTimer = 0;
-                    Ready = "No";
+            if (nextMove == "Stop" )
+            {
+                readyTimer = 990;
+                ReproductTimer += 1;
+               
+                
+                if (Gender == "M" & ReproductTimer == 510)
+                {}
+
+                else if(Gender == "F" & ReproductTimer == 500 )
+                {
+                    get_simulation().Add(new Animal(Classe, Color, X, Y, 10, 10, 100, 30, genders[random.Next(genders.Length)], "No", get_simulation(), Radius));
+                    ready = "No";
                 }
-                
-                ReproductTimer = 0;
-                
-                Ready = "No";
                 
             }
         }
@@ -352,25 +383,31 @@ namespace EcosystemProject
                             if (item.GetType() == typeof(Meat))
                             {
                                 Eat(item);
+                                ready = "Yes";
+                                readyTimer = 0;
                             }
                             
                         }
                         if (Classe == typeof(Herbivorous))
                         {
-                           
+                            moveSpeed = 2;
+
                             if (item.Classe == typeof(Carnivorous))
                             {
                                 
                                 nigerooo(item);
-                                
+                                ready = "No";
+                                readyTimer = 0;
+
                             }
                             if (item.GetType() == typeof(Plant))
                             {
                                 Eat(item);
+                                
                             }
                             
                         }
-                        if (item.Classe == Classe && item.Gender != Gender && Ready == "Yes")
+                        if (item.Classe == Classe && item.Gender != Gender && ready == "Yes" & item.ready == "Yes")
                         {
                             Reproduct(item, Classe);
                         }
