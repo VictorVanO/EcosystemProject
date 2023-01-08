@@ -22,7 +22,7 @@ Plants feed from the poop and they can create new plants.
 -
 ## SOLID Principles
 
-### solid1
+### Lyskov Substitution Principle
 -The Lyskov Substitution principle protocol defines a notion of substitutability for objects; that is, if S is a subtype of T, then objects of type T in a program may be replaced with objects of type S without altering any of the desirable properties of that program.
 Ideed we can see below the attributes Radius and Ready of the "T" class SimulationObject
 <picture>
@@ -44,7 +44,7 @@ and here
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_using2.PNG">
 <picture>
 
-### solid2
+### Open/Closed Principle
 -The Open/closed states "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification";that is, such an entity can allow its behaviour to be extended without modifying its source code.
 As you can see below The class Animal has The carnivorous and the herbivorous sub classes
 <picture>
