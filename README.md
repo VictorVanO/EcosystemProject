@@ -8,7 +8,7 @@ After some time, the animals poop. If the meat is not eaten, it becomes poop. Th
 Plants feed from the poop and they can create new plants.
 
 The animals and plants have energy. They lose energy over time and if their energy bar is empty, they lose health to refill it.
-To refill their energy, they have to eat.
+To refill their health, they have to eat.
 
 When the animals and plants have no remaining health, they die and disappear from the simulation.
 
