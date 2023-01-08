@@ -5,12 +5,14 @@
 The simulation contains multiples entities. It has animals and plants.
 The animals have a gender ("Male" or "Female") and they are either carnivorous or herbivorous. When an animal dies, he becomes meat.
 After some time, the animals poop. If the meat is not eaten, it becomes poop. They can fight each other to get food.
-Plants feed from the poop and they can create new plants.
 
 The animals and plants have energy. They lose energy over time and if their energy bar is empty, they lose health to refill it.
 To refill their health, they have to eat.
 
 When the animals and plants have no remaining health, they die and disappear from the simulation.
+
+The animals can reproduce if there is a male and a female.
+Plants feed from the poop so they can create new plants.
 
 ## Entities
 - Red Circle              : Male Carnivorous Animal
