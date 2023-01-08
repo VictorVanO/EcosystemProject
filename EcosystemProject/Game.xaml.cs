@@ -26,7 +26,6 @@ public Game()
         simulation = Resources["Simulation"] as Simulation;
 
         timer = Dispatcher.CreateTimer();
-        timer.Interval = TimeSpan.FromMilliseconds(gameSpeed);
         timer.Tick += this.OnTimeEvent;
         timer.Start();
         
