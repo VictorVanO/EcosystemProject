@@ -26,14 +26,10 @@ Plants feed from the poop so they can create new plants.
 - Brown Ellipse           : Poop
 
 ## Class Diagram
-<picture>
-  <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/ClassDiagram.png">
-</picture>
+![image](https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/ClassDiagram.png)
 
 ## Sequence Diagram
-<picture>
-  <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/SequenceDiagram.png">
-</picture>
+![image](https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/SequenceDiagram.png)
 
 ## SOLID Principles
 
