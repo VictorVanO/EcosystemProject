@@ -26,12 +26,16 @@ Plants feed from the poop and they can create new plants.
 -The Open/closed states "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification";that is, such an entity can allow its behaviour to be extended without modifying its source code.
 As you can see below The class Animal has The carnivorous and the herbivorous sub classes 
 <picture>
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
+  <img src="">
 <picture>
 
 I can add an other class lets say Nocturnous
-
+  <picture>
+  <img src="">
+<picture>
 As you can see i have succesfully added The Nocturnous class below the heritage of Animal
-
+<picture>
+  <img src="">
+<picture>
 ### solid2
 -
