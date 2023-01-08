@@ -51,7 +51,7 @@ As you can see below The class Animal has The carnivorous and the herbivorous su
 <picture>
 
 I can add an other class lets say Nocturnous
-  <picture>
+<picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S2_Added%20Class.PNG">
 <picture>
 As you can see i have succesfully added The Nocturnous class below the heritage of Animal
