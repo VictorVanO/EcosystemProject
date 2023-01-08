@@ -46,7 +46,7 @@ and here
 
 ### solid2
 -The Open/closed states "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification";that is, such an entity can allow its behaviour to be extended without modifying its source code.
-As you can see below The class Animal has The carnivorous and the herbivorous sub classes 
+As you can see below The class Animal has The carnivorous and the herbivorous sub classes
 <picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S2_Files%20before.PNG">
 <picture>
