@@ -28,10 +28,12 @@ Ideed we can see below the attributes Radius and Ready of the "T" class Simulati
 <picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_attributes.JPG">
 <picture>
+  
 then we know that Animal is a subtype of SimulationObject
 <picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_legacy.JPG">
 <picture>
+  
 We can see that Animal uses the attributes and change their value without going on the SimulationObject class
 <picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_using.JPG">
@@ -39,7 +41,7 @@ We can see that Animal uses the attributes and change their value without going 
 <picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_using2.JPG">
 <picture>
-
+  
 ### solid2
 -The Open/closed states "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification";that is, such an entity can allow its behaviour to be extended without modifying its source code.
 As you can see below The class Animal has The carnivorous and the herbivorous sub classes 
