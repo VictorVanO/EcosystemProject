@@ -1,4 +1,5 @@
 
+using Microsoft.VisualBasic;
 using System.Security.Cryptography.X509Certificates;
 
 namespace EcosystemProject;
@@ -15,22 +16,23 @@ public partial class Game : ContentPage
     SimulationObject Item;
     int Count;
     int gameSpeed = 1;
-
 public Game()
 	{
-        
         InitializeComponent();
-
+        //creates the variable Simulation
         simulation = Resources["Simulation"] as Simulation;
-
+        //create a timer
         timer = Dispatcher.CreateTimer();
+        //Fix the interval of the timer at 1 milliseconds
         timer.Interval = TimeSpan.FromMilliseconds(gameSpeed);
+        //each 1 milliseconds launch the OnTimeEvent method
         timer.Tick += this.OnTimeEvent;
-        timer.Start();
-        
+        //start the simulation
+        timer.Start();   
     }
     private void OnTimeEvent(object source, EventArgs e)
     {
+        //Update the simulation
         simulation.Update();
         if(graphics != null)
         {
@@ -44,7 +46,7 @@ public Game()
         {
             timer.Start();
             PauseBtn.Text = "Pause";
-        } 
+        }
         else
         {
             timer.Stop();

@@ -12,10 +12,11 @@ namespace EcosystemProject
 
         bool isAlive = true;
         int addPoop = 1;
-        int checkPoopTimer = 0;
+        
         float rootRadius;
         float semisRadius;
 
+        int checkPoopTimer = 0;
         int spawnPlantTimer = 0;
         int spawnPlantStock = 0;
         public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation,float radius) : base(typeof(Plant),Colors.Green , x, y, health, energy, "", simulation, radius,"")
@@ -48,7 +49,6 @@ namespace EcosystemProject
                 checkPoopTimer++;
                 if (checkPoopTimer >= 100)
                 {
-                    // Call the ceckPoop function
                     checkPoop();
                     checkPoopTimer = 0;
                 }
@@ -63,8 +63,8 @@ namespace EcosystemProject
 
                 // If health is empty, animal dies
                 if (Health <= -10) { isAlive = false; }
-
             }
+            // If Plant is dead; set the energy bar to empty , add a Poop and remove the Plant
             if (isAlive == false)
             {
                 Energy = -10;
@@ -152,6 +152,7 @@ namespace EcosystemProject
                 }
             }
         }
+        //method to add a new plant close to it
         public void newPlant()
         {
             get_simulation().Add(new Plant(random.Next((int)(X - SemisRadius), (int)(X + SemisRadius)), random.Next((int)(Y - SemisRadius), (int)(Y + SemisRadius)), 10, 10, 160, 50, get_simulation(),Radius));

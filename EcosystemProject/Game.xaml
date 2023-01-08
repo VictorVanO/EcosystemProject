@@ -7,8 +7,8 @@
              BackgroundColor ="LightSalmon"
              Shell.PresentationMode="NotAnimated"
              Shell.NavBarIsVisible="false">
-            
-
+    
+    
     <ContentPage.Resources>
         
         <drawable:Simulation x:Key="Simulation" />
@@ -24,6 +24,7 @@
                       WidthRequest="1400">
 
         </GraphicsView>
+
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Button
                 x:Name="PauseBtn"
@@ -34,7 +35,7 @@
                 BorderColor="Black"
                 BorderWidth="3"
                 BackgroundColor="Orange"
-                SemanticProperties.Hint="Pause the simulation"
+                SemanticProperties.Hint="Pause/start the simulation"
                 Clicked="PauseClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
@@ -50,7 +51,6 @@
                 Clicked="CountClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
-            
             <Button
                 x:Name="AddAnimalBtn"
                 Text="Add Animal"
@@ -87,6 +87,6 @@
                 Clicked="Showhitboxes"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
-            </HorizontalStackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

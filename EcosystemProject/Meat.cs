@@ -9,11 +9,12 @@ namespace EcosystemProject
         {}
         public override void Update()
         {
+            //the meat loses Energy over time
             if (exist)
             {
                 Health -= 0.01;
             }
-            // If health is empty, meat becomes poop
+            // If health is empty, remove meat and add poop instead
             if (Health <= -10) 
             {
                 exist = false;

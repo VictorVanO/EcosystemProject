@@ -6,7 +6,6 @@ namespace EcosystemProject
         bool exist = true;
         public Poop(double x, double y, Simulation simulation,float radius) : base(typeof(Poop),Colors.SaddleBrown, x, y, 0, 0, "", simulation,radius,"")
         {
-
         }
         public override void Update()
         {
