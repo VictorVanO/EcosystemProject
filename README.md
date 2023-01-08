@@ -16,7 +16,7 @@ Plants feed from the poop so they can create new plants.
 
 ## Entities
 - Red Circle              : Male Carnivorous Animal
-- Pink Circle             : Female Carnivours Animal
+- Pink Circle             : Female Carnivorous Animal
 - Blue Circle             : Male Herbivorous Animal
 - Light Blue Circle       : Female Herbivorous Animal
 - Green Circle            : Plant
