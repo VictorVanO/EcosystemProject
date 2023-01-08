@@ -26,7 +26,7 @@ Plants feed from the poop and they can create new plants.
 -The Open/closed states "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification";that is, such an entity can allow its behaviour to be extended without modifying its source code.
 As you can see below The class Animal has The carnivorous and the herbivorous sub classes 
 <picture>
-  <img src="">
+  <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_attributes.JPG">
 <picture>
 
 I can add an other class lets say Nocturnous
