@@ -40,7 +40,6 @@ We can see that Animal uses the attributes and change their value without going 
 <picture>
   
 and here
-  
 <picture>
   <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/S1_using2.PNG">
 <picture>
