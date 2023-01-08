@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace EcosystemProject
 
         int spawnPlantTimer = 0;
         int spawnPlantStock = 0;
-        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation,float radius) : base(typeof(Plant),Colors.Green, x, y, health, energy, "", simulation, radius,"")
+        public Plant(double x, double y, double health, double energy, float rootRadius, float semisRadius, Simulation simulation,float radius) : base(typeof(Plant),Colors.Green , x, y, health, energy, "", simulation, radius,"")
         {
             this.rootRadius = rootRadius;
             this.semisRadius = semisRadius;
@@ -71,6 +72,16 @@ namespace EcosystemProject
                 {
                     get_simulation().Add(new Poop(X, Y, get_simulation(), Radius));
                     addPoop = 0;
+                }
+                foreach (SimulationObject item in get_simulation().Objects)
+                {
+                    if (item.X == X & item.Y == Y)
+                    {
+                        if (item.GetType() == typeof(Plant) && isAlive == false)
+                        {
+                            get_simulation().Remove(item);
+                        }
+                    }
                 }
             }
         }

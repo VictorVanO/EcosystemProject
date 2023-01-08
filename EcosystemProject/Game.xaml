@@ -4,7 +4,7 @@
              xmlns:drawable="clr-namespace:EcosystemProject"
              x:Class="EcosystemProject.Game"
              Title="Game"
-             BackgroundColor="ForestGreen"
+             BackgroundColor ="LightSalmon"
              Shell.PresentationMode="NotAnimated"
              Shell.NavBarIsVisible="false">
             
@@ -27,66 +27,66 @@
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Button
                 x:Name="PauseBtn"
-                Text="PAUSE"
+                Text="Pause"
                 FontSize="28"
-                TextColor="Black"
-                BorderColor="#262626"
-                BorderWidth="2"
-                BackgroundColor="White"
+                FontFamily=""
+                TextColor="White"
+                BorderColor="Black"
+                BorderWidth="3"
+                BackgroundColor="Orange"
                 SemanticProperties.Hint="Pause the simulation"
                 Clicked="PauseClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
             <Button
-                x:Name="SpeedBtn"
-                Text="x1"
+                x:Name="CountBtn"
+                Text="Count living beings"
                 FontSize="28"
-                TextColor="Black"
-                BorderColor="#262626"
-                BorderWidth="2"
-                BackgroundColor="White"
-                SemanticProperties.Hint="Change the simulation speed"
-                Clicked="SpeedClicked"
+                TextColor="White"
+                 BorderColor="Black"
+                BorderWidth="3"
+                BackgroundColor="Orange"
+                SemanticProperties.Hint="Count the number of animals and plants"
+                Clicked="CountClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
+            
             <Button
                 x:Name="AddAnimalBtn"
-                Text="ADD ANIMAL"
+                Text="Add Animal"
                 FontSize="28"
-                TextColor="Black"
-                BorderColor="#262626"
-                BorderWidth="2"
-                BackgroundColor="White"
+                TextColor="White"
+                BorderColor="Black"
+                BorderWidth="3"
+                BackgroundColor="Orange"
                 SemanticProperties.Hint="Add animal to the simulation"
                 Clicked="AddAnimalClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
             <Button
                 x:Name="AddPlantBtn"
-                Text="ADD PLANT"
+                Text="Add Plant"
                 FontSize="28"
-                TextColor="Black"
-                BorderColor="#262626"
-                BorderWidth="2"
-                BackgroundColor="White"
+                TextColor="White"
+                 BorderColor="Black"
+                BorderWidth="3"
+                BackgroundColor="Orange"
                 SemanticProperties.Hint="Add plant to the simulation"
                 Clicked="AddPlantClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
             <Button
                 x:Name="Showbtn"
-                Text="Show"
+                Text="Show Hitbox"
                 FontSize="28"
-                TextColor="Red"
-                BorderColor="#262626"
-                BorderWidth="2"
-                BackgroundColor="White"
+                TextColor="White"
+                 BorderColor="Black"
+                BorderWidth="3"
+                BackgroundColor="Orange"
                 SemanticProperties.Hint="Show hitboxes of the creatures"
                 Clicked="Showhitboxes"
                 HorizontalOptions="Center"
                 VerticalOptions="Start" />
-            
-
-        </HorizontalStackLayout>
+            </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

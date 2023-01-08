@@ -8,15 +8,13 @@ public partial class Game : ContentPage
     IDispatcherTimer timer;
     Simulation simulation;
     bool isRunning = true;
-
-    int gameSpeed = 1;
-   
-
     Random random = new Random();
     string[] genders = { "M", "F" };
     Type[] Classes = { typeof(Carnivorous), typeof(Herbivorous) };
-    int activate = 1;
+    int Hitbox = 1;
     SimulationObject Item;
+    int Count;
+    int gameSpeed = 1;
 
 public Game()
 	{
@@ -26,6 +24,7 @@ public Game()
         simulation = Resources["Simulation"] as Simulation;
 
         timer = Dispatcher.CreateTimer();
+        timer.Interval = TimeSpan.FromMilliseconds(gameSpeed);
         timer.Tick += this.OnTimeEvent;
         timer.Start();
         
@@ -44,31 +43,29 @@ public Game()
         if (isRunning)
         {
             timer.Start();
-            PauseBtn.Text = "PAUSE";
+            PauseBtn.Text = "Pause";
         } 
         else
         {
             timer.Stop();
-            PauseBtn.Text = "START";
+            PauseBtn.Text = "Start";
         }
     }
-    private void SpeedClicked(object sender, EventArgs e)
+    private void CountClicked(object sender, EventArgs e)
     {
-        if (gameSpeed == 10)
+       
+        foreach (SimulationObject item in simulation.Objects)
         {
-            SpeedBtn.Text = "x2";
-            gameSpeed = 5;
+            Item = item;
+            if(item.GetType() == typeof(Plant)| item.GetType() == typeof(Animal) )
+            {
+                Count += 1;
+            }
+            
         }
-        else if (gameSpeed == 5)
-        {
-            SpeedBtn.Text = "x10";
-            gameSpeed = 1;
-        }
-        else if (gameSpeed == 1)
-        {
-            SpeedBtn.Text = "x1";
-            gameSpeed = 10;
-        }
+        CountBtn.Text = "living beings: "+Count.ToString();
+        Count = 0;
+        
     }
 
     private void AddAnimalClicked(object sender, EventArgs e)
@@ -89,23 +86,23 @@ public Game()
     }
     private void Showhitboxes(object sender, EventArgs e)
     {
-        if (activate == 1)
+        if (Hitbox == 1)
         { 
             foreach (SimulationObject item in simulation.Objects)
             {
                 item.Radius = 1;
             }
-            Showbtn.Text = "Hide";
-            activate = 0;
+            Showbtn.Text = "Hide Hitbox";
+            Hitbox = 0;
         }
-        else if (activate == 0)
+        else if (Hitbox == 0)
         {
             foreach (SimulationObject item in simulation.Objects)
             {
                 item.Radius = 0;
             }
-            Showbtn.Text = "Show";
-            activate = 1;
+            Showbtn.Text = "Show Hitbox";
+            Hitbox = 1;
         }
     }
 }

@@ -10,10 +10,6 @@ public partial class MainMenu : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(Game)); // Go to 'Game' view
     }
-    private async void OnSettingsClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(Game));
-    }
     private void OnQuitClicked(object sender, EventArgs e)
     {
         Application.Current.Quit(); // Close the app

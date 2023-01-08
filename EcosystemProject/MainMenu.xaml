@@ -21,12 +21,12 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="By Van Olffen Victor and Mourad Mettioui"
+                Text="By Van Olffen Victor and Mettioui Mourad "
                 SemanticProperties.HeadingLevel="Level2"
                 FontSize="16"
                 FontFamily="Arial"
                 Margin="40"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"/>
             
             <Button
                 x:Name="StartBtn"
@@ -38,19 +38,6 @@
                 BackgroundColor="NavajoWhite"
                 SemanticProperties.Hint="Start the simulation"
                 Clicked="OnStartClicked"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="SettingsBtn"
-                Text="Settings"
-                FontSize="28"
-                TextColor="Black"
-                BorderColor="#262626"
-                BorderWidth="2"
-                BackgroundColor="NavajoWhite"
-                Margin="-5"
-                SemanticProperties.Hint="Open the settings"
-                Clicked="OnSettingsClicked"
                 HorizontalOptions="Center" />
 
             <Button

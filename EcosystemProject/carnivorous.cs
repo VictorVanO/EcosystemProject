@@ -17,11 +17,7 @@ namespace EcosystemProject
 
         public override void Draw(ICanvas canvas)
         {
-            canvas.StrokeColor = Colors.Red;
-            canvas.DrawCircle((float)X, (float)Y, ActionRadius);
-
-            canvas.StrokeColor = Colors.LightBlue;
-            canvas.DrawCircle((float)X, (float)Y, VisionRadius);
+        
 
         }
         

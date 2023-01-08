@@ -6,9 +6,7 @@ namespace EcosystemProject
         bool exist = true;
         int addPoop = 1;
         public Meat(double x, double y, double health, Simulation simulation,float radius) : base(typeof(Meat),Colors.IndianRed, x, y, 10, 0, "",simulation,radius, "")
-        {
-
-        }
+        {}
         public override void Update()
         {
             if (exist)
@@ -17,8 +15,18 @@ namespace EcosystemProject
             }
             // If health is empty, meat becomes poop
             if (Health <= -10) 
-            { 
+            {
                 exist = false;
+                foreach (SimulationObject item in get_simulation().Objects)
+                {
+                    if (item.X == X & item.Y == Y)
+                    {   
+                        if (item.GetType() == typeof(Meat) && exist == false)
+                        { 
+                            get_simulation().Remove(item);
+                        }
+                    }
+                }
                 if (addPoop == 1)
                 {
                     get_simulation().Add(new Poop(X, Y, get_simulation(),Radius));

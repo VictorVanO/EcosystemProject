@@ -49,7 +49,6 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\forestbackground.png" />
-	  <None Remove="Resources\Images\pixel_green.gif" />
 	  <None Remove="Resources\Images\safari.png" />
 	</ItemGroup>
 

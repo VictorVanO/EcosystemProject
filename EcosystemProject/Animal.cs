@@ -1,5 +1,3 @@
-
-
 using Microsoft.Maui.Graphics;
 using System;
 using System.ComponentModel;
@@ -10,15 +8,11 @@ namespace EcosystemProject
 {
     public class Animal : SimulationObject
     {
-        Type[] Classes = { typeof(Carnivorous), typeof(Herbivorous) };
-
-        
-
         Random random = new Random();
         string[] genders = { "M", "F" };
 
         string[] moves = { "Up", "Down", "Left", "Right", "Stop" };
-        String nextMove = "";
+        string nextMove = "Stop";
         int moveSpeed = 1;
 
         double leftX = 10;
@@ -36,16 +30,17 @@ namespace EcosystemProject
         int attackTimer = 0;
         int ReproductTimer = 0;
         int readyTimer = 0;
-        
+        PathF path = new PathF();
 
-        public Animal(Type classe, Color color, double x, double y, double health, double energy, float visionRadius, float actionRadius, string gender,string Ready, Simulation simulation, float radius) : base(classe,color, x, y, health, energy, gender, simulation, radius,Ready)
+
+        public Animal(Type classe, Color color, double x, double y, double health, double energy, float visionRadius, float actionRadius, string gender,string ready, Simulation simulation, float radius) : base(classe,color, x, y, health, energy, gender, simulation, radius,ready)
         {
             this.visionRadius = visionRadius;
             this.actionRadius = actionRadius;
             
             
             
-            nextMove = moves[random.Next(moves.Length)]; //The first move direction is random
+           
         }
 
         public float VisionRadius { get { return this.visionRadius; } set { this.visionRadius = value; } }
@@ -54,6 +49,7 @@ namespace EcosystemProject
        
         public override void Update()
         {
+
 
             if (isAlive)
             {
@@ -69,8 +65,6 @@ namespace EcosystemProject
                         Energy = 10;
                         Health -= 5;
                     }
-                    // If health is empty, animal dies
-                    if (Health <= -10) { isAlive = false; }
                 }
                 else // Or if animal has energy
                 {
@@ -83,21 +77,29 @@ namespace EcosystemProject
                     get_simulation().Add(new Poop(X, Y, get_simulation(), Radius));
                     poopTimer = 0;
                 }
+                // If health is empty, animal dies
+                if (Health <= -10) { isAlive = false; }
             }
-
-           
-
             // If animal is dead, set the energy bar to empty and add a meat
             if (isAlive == false)
             {
-                
                 Energy = -10;
                 if (addMeat == 1)
                 {
                     get_simulation().Add(new Meat(X, Y, 10, get_simulation(), Radius));
+                    
                     addMeat = 0;
-                    get_simulation().Remove(new Animal(Classe,Color,X, Y, Health, Energy, VisionRadius, ActionRadius, Gender ,ready, get_simulation(), Radius));
-                    ready = "No";
+                    Ready = "No";
+                }
+                foreach (SimulationObject item in get_simulation().Objects)
+                {
+                    if (item.X == X & item.Y == Y)
+                    {
+                        if (item.GetType() == typeof(Animal) && isAlive == false)
+                        {
+                            get_simulation().Remove(item);
+                        }
+                    }
                 }
             }
 
@@ -159,24 +161,41 @@ namespace EcosystemProject
                 //Zone vision
                 canvas.StrokeColor = Colors.White;
                 canvas.DrawCircle((float)X, (float)Y, Radius * VisionRadius);
+                
 
-                if (ready == "Yes")
+                if (Ready == "Yes")
                 {
+                    
+                    canvas.StrokeColor = Colors.Red;
+                    canvas.StrokeSize = 1;
+                    canvas.DrawLine((float)X, (float)Y - 26, (float)X + 4, (float)Y - 31);
+                    canvas.DrawLine((float)X, (float)Y - 26, (float)X - 4, (float)Y - 31);
+                    canvas.FillColor = Colors.Red;
+                    canvas.DrawArc((float)X , (float)Y - 34,  4, 6, 0, 180, false,false);
+                    canvas.DrawArc((float)X - 4, (float)Y - 34, 4, 6, 0, 180, false,false);
                     readyTimer++;
-                    canvas.FillColor = Colors.HotPink;
-                    canvas.FillCircle(new Point(X, Y-30), 4.0);
-                    if (readyTimer == 1000)
+                    if (readyTimer >= 1000)
                     {
-                        canvas.FillColor = Colors.ForestGreen;
-                        canvas.FillCircle(new Point(X, Y - 30), 4.0);
                         readyTimer = 0;
-                        ready = "No";
+                        Ready = "No";
                         
                     }
                 }
-                else if(ready == "No")
-                {}
+                else if (Ready == "Not now")
+                {
 
+                    canvas.StrokeColor = Colors.Black;
+                    canvas.StrokeSize = 1;
+                    canvas.DrawLine((float)X, (float)Y - 26, (float)X + 4, (float)Y - 31);
+                    canvas.DrawLine((float)X, (float)Y - 26, (float)X - 4, (float)Y - 31);
+                    canvas.FillColor = Colors.Black;
+                    canvas.DrawArc((float)X, (float)Y - 34, 4, 6, 0, 180, false, false);
+                    canvas.DrawArc((float)X - 4, (float)Y - 34, 4, 6, 0, 180, false, false);
+                    Ready = "Yes";
+                    
+                }
+                else if(Ready == "No")
+                { readyTimer = 0; }
                 //canvas.StrokeColor = Colors.ForestGreen;
                 //canvas.DrawLine(0 , 0, 1000, 1000);
             }
@@ -256,10 +275,8 @@ namespace EcosystemProject
             }
 
         }
-        public void nigerooo(SimulationObject item)
+        public void Escape(SimulationObject item)
         {
-
-            
 
             if (item.X <= (X - ActionRadius) && item.X <= (X + ActionRadius))
             {
@@ -269,17 +286,37 @@ namespace EcosystemProject
             {
                 nextMove = "Left";
             }
-            else if (item.X <= (X - ActionRadius) | item.X >= (X + ActionRadius))
+            else if (item.X >= (X - ActionRadius) | item.X <= (X + ActionRadius))
             {
                 if (item.Y <= (Y - ActionRadius) && item.Y <= (Y + ActionRadius))
                 {
                     nextMove = "Down";
+                }
+                else if (item.Y >= (Y - ActionRadius) && item.Y < Y )
+                {
+                    nextMove = "Down";
+
+                    if (bottomY <= (Y + actionRadius) && item.Y >= (Y - ActionRadius) & item.Y < Y)
+                    {
+                        nextMove = "Right";
+                    }
                 }
                 else if (item.Y >= (Y - ActionRadius) && item.Y >= (Y + ActionRadius))
                 {
                     nextMove = "Up";
                     
                 }
+                else if (item.Y <= (Y + ActionRadius) && item.Y > Y)
+                {
+                    nextMove = "Up";
+
+                    if (topY >= (Y - ActionRadius) && item.Y <= (Y + ActionRadius) & item.Y > Y)
+                    {
+                        nextMove = "Left";
+                    }
+
+                }
+
             }
         }
         public void Attack(SimulationObject item)
@@ -307,16 +344,13 @@ namespace EcosystemProject
 
             attackTimer++;
             poopTimer = 0;
-            //if (Health == 10 & Energy >= 0)
-            //{
-                //Move()
-            //}
+            
             if (attackTimer >= 100 && nextMove == "Stop")
             {
                 item.Health -= 5;
                 attackTimer = 0;
-                Energy += 6;
-                ready = "Yes";
+                Energy += 8;
+                Ready = "Yes";
                     
                 if (Energy > 10)
                 {
@@ -326,7 +360,7 @@ namespace EcosystemProject
                         Energy -= 20;
                     }
                     
-                    if (Health >= 10)
+                    if (Health >= 10 & Energy >= 10)
                     {
                         Health = 10;
                         Energy = 10;
@@ -334,9 +368,7 @@ namespace EcosystemProject
                 }
                 if (item.Health <= -10)
                 {
-                    
                     get_simulation().Remove(item);
-                    ready = "Yes";
                     readyTimer = 0;
 
                 }
@@ -344,24 +376,26 @@ namespace EcosystemProject
         }
         public void Reproduct(SimulationObject item,Type Classe)
         {
-            
+            readyTimer = 0;
             Approaching(item);
             poopTimer = 0;
             
 
             if (nextMove == "Stop" )
             {
-                readyTimer = 990;
+                readyTimer = 750;
                 ReproductTimer += 1;
                
                 
-                if (Gender == "M" & ReproductTimer == 510)
+                if (Gender == "M" & ReproductTimer >= 510)
                 {}
 
-                else if(Gender == "F" & ReproductTimer == 500 )
+                else if(Gender == "F" & ReproductTimer >= 500 )
                 {
                     get_simulation().Add(new Animal(Classe, Color, X, Y, 10, 10, 100, 30, genders[random.Next(genders.Length)], "No", get_simulation(), Radius));
-                    ready = "No";
+                    Ready = "No";
+                    ReproductTimer = 0;
+                    
                 }
                 
             }
@@ -373,7 +407,7 @@ namespace EcosystemProject
                 if (item.X >= (X - VisionRadius) && item.X <= (X + VisionRadius))
                 {
                     if (item.Y >= (Y - VisionRadius) && item.Y <= (Y + VisionRadius))
-                    {   
+                    { 
                         if (Classe == typeof(Carnivorous))
                         {
                             if (item.Classe == typeof(Herbivorous))
@@ -383,8 +417,7 @@ namespace EcosystemProject
                             if (item.GetType() == typeof(Meat))
                             {
                                 Eat(item);
-                                ready = "Yes";
-                                readyTimer = 0;
+                                
                             }
                             
                         }
@@ -395,19 +428,23 @@ namespace EcosystemProject
                             if (item.Classe == typeof(Carnivorous))
                             {
                                 
-                                nigerooo(item);
-                                ready = "No";
-                                readyTimer = 0;
-
+                                Escape(item);
+                                if (Ready == "Yes")
+                                {
+                                    Ready = "Not now";
+                                }
                             }
                             if (item.GetType() == typeof(Plant))
                             {
-                                Eat(item);
-                                
+                                if (Health == 10 & Energy >= 0)
+                                { }
+                                else { Eat(item); }
+
+
                             }
                             
                         }
-                        if (item.Classe == Classe && item.Gender != Gender && ready == "Yes" & item.ready == "Yes")
+                        if (item.Classe == Classe && item.Gender != Gender && Ready == "Yes" & item.Ready == "Yes")
                         {
                             Reproduct(item, Classe);
                         }
