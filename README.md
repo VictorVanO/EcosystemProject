@@ -1,6 +1,8 @@
 # EcosystemProject
 2D Ecosystem simulation project made by Van Olffen Victor & Mettioui Mourad
-
+<picture>
+  <img src="https://github.com/VictorVanO/EcosystemProject/blob/main/images%20project/C.PNG">
+<picture>
 ## Simulation
 The simulation contains multiples entities. It has animals and plants.
 The animals have a gender ("Male" or "Female") and they are either carnivorous or herbivorous. When an animal dies, he becomes meat.
